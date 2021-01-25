@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import styled from 'styled-components';
 
-function App() {
+import Main from './layouts/Main';
+import About from './layouts/About';
+import Technologies from './layouts/Technologies';
+import Projects from './layouts/Projects';
+import Footer from './layouts/Footer';
+
+// import logo from './logo.svg';
+
+
+const App = () => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    {/* <Reset /> */}
+      <AppWrapper>
+        <Main />
+        <About />
+        <Technologies />
+        <Projects />
+        <Footer />
+      </AppWrapper>
+    </>
   );
 }
+
+const AppWrapper = styled.div`
+  width: 700vw;
+  max-height: 100vh;
+  display: flex;
+`
 
 export default App;
