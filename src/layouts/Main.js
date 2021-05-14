@@ -9,102 +9,70 @@ const Main = () => {
 
   return (
     <MainWrapper>
-      <nav>
-        <li>About Me</li>
-        <li>Technologies</li>
-        <li>Projects</li>
-        <li>Contact</li>
-      </nav>
-      <section>
+      <div>
+        <div className="half-back"></div>
         <p>{tagline}</p>
-      </section>
-      <aside>
-        <p>>></p>
-        <button>ENG</button>
-        <button>CZ</button>
-        <button>PL</button>
-      </aside>
+        <aside>
+          {/* <p>>></p> */}
+          <button>ENG</button>
+          <button>CZ</button>
+          <button>PL</button>
+        </aside>
+      </div>
     </MainWrapper>
   );
 }
 
-const MainWrapper = styled.div`
-  background: url(${back});
-  background-size: cover;
-  width: 100vw;
-  max-height: 100vh;
-  /* font-family: 'Aldrich', sans-serif; */
-  /* font-family: 'Quantico', sans-serif; */
-  /* font-family: 'Electrolize', sans-serif; */
-  /* font-family: 'Chakra Petch', sans-serif; */
-  font-family: 'Turret Road', cursive;
-  /* font-family: 'Rationale', sans-serif; */
-  /* font-family: 'Iceland', cursive; */
-  /* font-weight: 700; */
+const MainWrapper = styled.section`
+  min-height: 100vh;
   color: white;
-  overflow: hidden;
-
-  nav {
-    display: flex;
-    list-style: none;
-    position: absolute;
-    top: 2vh;
-    right: 4vw;
-    min-width: 30%;
+  div {
+    height: 180vh;
+    .half-back {
+      width: 0;
+      height: 0;
+      border-bottom: 180vh solid rgba(0, 0, 0, .75);
+      border-right: 200vh solid transparent;
+    }
+    p {
+      font-size: 130px;
+      font-weight: bold;
+      line-height: 160px;
+      letter-spacing: 5px;
+      width: 45vw;
+      position: absolute;
+      top: 10%;
+      left: 10vw;
+    }
+    aside {
+      width: 100%;
+      position: absolute;
+      bottom: 4vh;
+      right: 0;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      button {
+        font-family: 'Turret Road', cursive;
+        font-size: 1.3rem;
+        color: white;
+        text-align: center;
+        min-width: 8%;
+        padding: .5em 1em;
+        margin: 0 1em;
+        border-color: black;
+        background-color: transparent;
+        border-style: none;
+        outline: none;
+        cursor: pointer;
+        transition: .5s;
+      }
+      button:hover {
+        background-color: purple;
+        box-shadow: 0 0 20px purple, 0 0 50px purple, 0 0 80px purple, 0 0 110px purple;
+      }
+    }
   }
-
-  li {
-    font-size: 1.3rem;
-    min-width: 4em;
-    padding: 1vh 2vw;
-    margin: 1.8vh 2vw;
-  }
-
-  section {
-    width: 45vw;
-    position: absolute;
-    top: 18vh;
-    left: 15vw;
-  }
-
-  section p {
-    font-size: 90px;
-    line-height: 180px;
-    letter-spacing: 5px;
-  }
-
-  aside {
-    width: 95vw;
-    position: absolute;
-    bottom: 4vh;
-    right: 1vw;
-  }
-
-  aside p {
-    width: 10vw;
-    padding: 1vh .2vw;
-    margin: 0 0 10vh auto;
-    font-size: 90px;
-    text-align: center;
-  }
-
-  button {
-    /* padding: 1vh .2vw; */
-    /* margin: 1vh .3vw; */
-    margin: 5px;
-    /* border-color: black; */
-    background-color: transparent;
-    color: white;
-    border-style: none;
-    min-width: 10vw;
-    outline: none;
-    font-size: 18px;
-  }
-
-  button:hover {
-    cursor: pointer;
-  }
-
 `
 
 export default Main;

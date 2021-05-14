@@ -12,9 +12,9 @@ const Projects = () => {
 }
 
 const ProjectsWrapper = styled.div`
-  width: 300vw;
-  max-height: 100vh;
-  background-color: black;
+  background-color: rgba(0, 0, 0, .75);
+  /* width: 300vw; */
+  min-height: 200vh;
   color: white;
 `
 

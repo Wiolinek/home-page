@@ -12,9 +12,8 @@ const Footer = () => {
 }
 
 const FooterWrapper = styled.div`
-  width: 100vw;
-  max-height: 100vh;
-  background-color: black;
+  background-color: purple;
+  min-height: 10vh;
   color: white;
 `
 
