@@ -51,8 +51,9 @@ const AppWrapper = styled.div`
   background: url(${back});
   background-attachment: fixed;
   background-size: cover;
-  /* width: 700vw; */
-  min-height: 700vh;
+  background-repeat: no-repeat;
+  /* width: 100vw; */
+  /* min-height: 700vh; */
   /* display: flex; */
 `
 

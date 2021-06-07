@@ -1,4 +1,8 @@
 import React from 'react';
+import redux from '../images/redux.svg';
+import stylComp from '../images/style-comp.png';
+import gsap from '../images/gsap.webp';
+import mysql from '../images/mysql.webp';
 
 import styled from 'styled-components'
 
@@ -7,57 +11,89 @@ const Technologies = () => {
 
   return (
     <TechnologiesWrapper>
-      <div className="section-title">
-        <p>Technologies</p>
+      <div className="section-name">
+        <h1>Technologies</h1>
       </div>
-      <div className="grid-container">
-        <div><p>HTML</p></div>
-        <div><p>CSS</p></div>
-        <div><p>JavaScript</p></div>
-        <div><p>React</p></div>
-        <div><p>Node.js</p></div>
-        <div><p>Express</p></div>
+      <div>
+        <i className="fab fa-html5"></i>
+      </div>
+      <div>
+        <i className="fab fa-css3-alt"></i>
+      </div>
+      <div>
+        <i className="fab fa-sass"></i>
+      </div>
+      <div>
+        <img src={stylComp} alt="Logo" />
+      </div>
+      <div>
+        <img src={gsap} alt="Logo" />
+      </div>
+      <div>
+        <i className="fab fa-js-square"></i>
+      </div>
+      <div>
+        <i className="fab fa-react"></i>
+      </div>
+      <div>
+        <img src={redux} alt="Logo"/>
+      </div>
+      <div>
+        <i className="fab fa-node"></i>
+      </div>
+      <div>
+        <p>Express</p>
+      </div>
+      <div>
+        <i class="fab fa-wordpress-simple"></i>
+      </div>
+      <div>
+        <img src={mysql} alt="Logo"/>
+      </div>
+      <div>
+        <i class="fab fa-npm"></i>
+      </div>
+      <div>
+        <i class="fab fa-git-alt"></i>
+      </div>
+      <div>
+        <p>GIMP</p>
       </div>
     </TechnologiesWrapper>
   );
 }
 
 const TechnologiesWrapper = styled.section`
-  background-color: black;
+  background-color: rgba(0, 0, 0, .75);
   min-height: 100vh;
   color: white;
-  display: flex;
-  justify-content: space-between;
-  .section-title {
-    /* transform: rotate(-90deg); */
-    /* width: 100%; */
-    text-align: center;
-    border: 3px solid purple; 
-  }
-  .section-title p {
-    /* transform: rotate(-90deg); */
-    margin: 0 auto;
-    /* display: block; */
-    width: 100%;
-    /* height: 100%; */
-    text-align: center;
-    border: 3px solid green; 
-  }
-  .grid-container {
-    width: 80%;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 300px);
-    grid-auto-rows: 300px;
-    grid-gap: 2em;
-    justify-content: center;
-    align-content: center;
+  padding: 10vh 1vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 350px);
+  grid-auto-rows: 350px;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 2em;
+  margin: 0 auto;
+  div {
+    display: flex;
     align-items: center;
-    border: 3px solid purple; 
-  }
-  .grid-container div {
-    text-align: center;
+    justify-content: center;
     border: 3px solid purple;
     height: 100%;
+    h1 {
+      font-size: 5em;
+    }
+    i {
+      font-size: 10em;
+      color: purple;
+    }
+    img {
+      max-width: 50%;
+    }
+  }
+  .section-name {
+    grid-column: 1 / 3;
   }
 `
 
