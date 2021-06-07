@@ -27,22 +27,22 @@ const MainWrapper = styled.section`
   min-height: 100vh;
   color: white;
   div {
-    height: 180vh;
+    /* height: 180vh; */
     .half-back {
       width: 0;
       height: 0;
-      border-bottom: 180vh solid rgba(0, 0, 0, .75);
-      border-right: 200vh solid transparent;
+      border-bottom: 115vh solid rgba(0, 0, 0, .75);
+      border-right: 100vw solid transparent;
     }
     p {
-      font-size: 130px;
+      font-size: 8em;
       font-weight: bold;
-      line-height: 160px;
+      line-height: 1.5em;
       letter-spacing: 5px;
-      width: 45vw;
+      width: 57vw;
       position: absolute;
-      top: 10%;
-      left: 10vw;
+      top: 25vh;
+      left: 15vw;
     }
     aside {
       width: 100%;
