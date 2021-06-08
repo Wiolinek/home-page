@@ -10,7 +10,7 @@ import styled from 'styled-components'
 const Technologies = () => {
 
   return (
-    <TechnologiesWrapper>
+    <TechnologiesWrapper id="technologies">
       <div className="section-name">
         <h1>Technologies</h1>
       </div>

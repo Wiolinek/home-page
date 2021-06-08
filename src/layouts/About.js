@@ -9,7 +9,7 @@ const About = () => {
 
 
   return (
-    <AboutWrapper>
+    <AboutWrapper id="about">
       <div className="my-photo">
           <img src={photo} alt="Logo" />
       </div>

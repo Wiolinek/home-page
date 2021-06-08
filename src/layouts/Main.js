@@ -8,12 +8,11 @@ const Main = () => {
   const tagline = "<Coding with {Passion}>"
 
   return (
-    <MainWrapper>
+    <MainWrapper id="home">
       <div>
         <div className="half-back"></div>
         <p>{tagline}</p>
         <aside>
-          {/* <p>>></p> */}
           <button>ENG</button>
           <button>CZ</button>
           <button>PL</button>
@@ -27,7 +26,6 @@ const MainWrapper = styled.section`
   min-height: 100vh;
   color: white;
   div {
-    /* height: 180vh; */
     .half-back {
       width: 0;
       height: 0;
@@ -47,18 +45,18 @@ const MainWrapper = styled.section`
     aside {
       width: 100%;
       position: absolute;
-      bottom: 4vh;
+      bottom: 2vh;
       right: 0;
       display: flex;
       justify-content: flex-start;
       align-items: center;
+      min-height: 7vh;
       button {
         font-family: 'Turret Road', cursive;
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         color: white;
         text-align: center;
-        min-width: 8%;
-        padding: .5em 1em;
+        padding: 0 .8em;
         margin: 0 1em;
         border-color: black;
         background-color: transparent;
