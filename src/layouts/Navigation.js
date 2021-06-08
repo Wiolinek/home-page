@@ -8,35 +8,38 @@ const Navigation = () => {
 
   return (
     <NavigationWrapper>
-        <li>About Me</li>
-        <li>Technologies</li>
-        <li>Projects</li>
-        <li>Contact</li>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#technologies">Technologies</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
     </NavigationWrapper>
   );
 }
 
 const NavigationWrapper = styled.nav`
     font-family: 'Turret Road', cursive;
-    color: white;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     list-style: none;
     position: fixed;
-    top: 0;
+    top: 2vh;
     right: 0;
     width: 100vw;
     min-height: 7vh;
     z-index: 2;
   li {
-    font-size: 1.3rem;
+    margin: 0 1em;
     text-align: center;
-    min-width: 8%;
-    padding: .5em 1em;
-    margin: 1em;
     cursor: pointer;
     transition: .5s;
+    a {
+      font-size: 1.8rem;
+      color: white;
+      text-decoration: none;
+      padding: 0 .8em;
+    }
   }
   li:hover {
     background-color: purple;
