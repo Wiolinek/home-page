@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const Contact = () => {
 
-  const logo = `< UV />`
+  const logo = `< UV />`;
 
   return (
     <ContactWrapper id="contact">
@@ -27,11 +27,11 @@ const Contact = () => {
             <button className="btn contact__btn" type="submit">Send</button>
         </form> */}
         <div className="contact-section__socials">
-          <a href="https://www.facebook.com/violinek123"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.facebook.com/violinek123"><i class="fab fa-facebook-messenger"></i></a>
-          <a href="https://www.linkedin.com/in/wioleta-polok-44248917/"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://github.com/Wiolinek"><i class="fab fa-github"></i></a>
-          <a href="https://codepen.io/wiola-p"><i class="fab fa-codepen"></i></a>
+          <a href="https://www.facebook.com/violinek123"><i className="fab fa-facebook-f"></i></a>
+          <a href="https://www.facebook.com/violinek123"><i className="fab fa-facebook-messenger"></i></a>
+          <a href="https://www.linkedin.com/in/wioleta-polok-44248917/"><i className="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/Wiolinek"><i className="fab fa-github"></i></a>
+          <a href="https://codepen.io/wiola-p"><i className="fab fa-codepen"></i></a>
           {/* <a href="https://www.facebook.com/violinek123"><i class="fab fa-slack"></i></a> */}
           {/* <a href="https://www.facebook.com/violinek123"><i class="fab fa-discord"></i></a> */}
         </div>
