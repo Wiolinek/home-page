@@ -1,21 +1,25 @@
 import React from 'react';
 
 import styled from 'styled-components'
-import back from '../images/back.jpg';
+// import back from '../images/back.jpg';
 
-const Main = () => {
+const Main = ({ changeLanguageHandler }) => {
 
-  const tagline = "<Coding with {Passion}>"
+  const tagline = "<Coding with {Passion}>";
+  const logo = `< UV />`;
 
   return (
     <MainWrapper id="home">
       <div>
+        <div className="logo">
+          <p>{logo}</p>
+        </div>
         <div className="half-back"></div>
         <p>{tagline}</p>
         <aside>
-          <button>ENG</button>
-          <button>CZ</button>
-          <button>PL</button>
+          <button onClick={changeLanguageHandler}>eng</button>
+          <button onClick={changeLanguageHandler}>cz</button>
+          <button onClick={changeLanguageHandler}>pl</button>
         </aside>
       </div>
     </MainWrapper>
@@ -26,6 +30,13 @@ const MainWrapper = styled.section`
   min-height: 100vh;
   color: white;
   div {
+    .logo {
+      color: white;
+      font-size: .5rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
     .half-back {
       width: 0;
       height: 0;
@@ -36,7 +47,7 @@ const MainWrapper = styled.section`
       font-size: 8em;
       font-weight: bold;
       line-height: 1.5em;
-      letter-spacing: 5px;
+      letter-spacing: 0.05em;
       width: 57vw;
       position: absolute;
       top: 25vh;
@@ -59,11 +70,12 @@ const MainWrapper = styled.section`
         padding: 0 .8em;
         margin: 0 1em;
         border-color: black;
+        text-transform: uppercase;
         background-color: transparent;
         border-style: none;
         outline: none;
         cursor: pointer;
-        transition: .5s;
+        transition: all .5s;
       }
       button:hover {
         background-color: purple;

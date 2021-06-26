@@ -1,127 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components'
 
-import home from '../images/home.png';
 
-const Projects = () => {
+const Projects = ({ language }) => {
 
+  const [projectsState, setProjectsState] = useState();
+
+  useEffect(() => {
+    fetch(`http://localhost:3030/projects`)
+    .then(response => response.json())
+    .then(result => setProjectsState(result))
+    .catch(error => console.log(`error ${error}`))
+  }, [language])
+  
   return (
     <ProjectsWrapper id="projects">
       <div className="projects-item section-name">
         <h1>Projects</h1>
       </div>
-      <div className="projects-item">
-        <div>
-          <p className="projects-item__project-name">Porcelana</p>
-          <div className="projects-item__photo"></div>
-          <div className="projects-item__buttons">
-            <a href="https://www.facebook.com/violinek123" target="_blank" rel="noreferrer">LIFE</a>
-            <a href="https://www.facebook.com/violinek123" target="_blank" rel="noreferrer">CODE</a>
+        {projectsState !== undefined && projectsState.map(project => 
+        <div key={project.name + project.language} className="projects-item">
+          <div>
+            <p className="projects-item__project-name">{project.name}</p>
+            {/* <p className="projects-item__project-desc">krotki opis strony w każdym języku</p> */}
+            <div className="projects-item__photo" style={{backgroundImage: `url(${project.image})`}}></div>
+            <div className="projects-item__buttons">
+              <a href={project.life} target="_blank" rel="noreferrer">LIFE</a>
+              <a href={project.code} target="_blank" rel="noreferrer">CODE</a>
+            </div>
+          </div>
+          <div className="projects-item__details">
+            <ul>
+              {project.technologies.split('\r\n').map(technologie =>
+                <li key={project.name + technologie} >{technologie}</li>)}
+            </ul>
           </div>
         </div>
-        <div className="projects-item__details">
-          <ul>
-            <li>React</li>
-            <li>React Router</li>
-            <li>React Scroll</li>
-            <li>GSAP</li>
-            <li>Day.js</li>
-            <li>SASS</li>
-            <li>Axios</li>
-            <li>Express.js</li>
-            <li>MySQL</li>
-          </ul>
-        </div>
-      </div>
-      <div className="projects-item">
-        <div>
-          <p className="projects-item__project-name">Photo Courses</p>
-          <div className="projects-item__photo"></div>
-          <div className="projects-item__buttons">
-            <a href="https://www.facebook.com/violinek123" target="_blank" rel="noreferrer">LIFE</a>
-            <a href="https://www.facebook.com/violinek123" target="_blank" rel="noreferrer">CODE</a>
-          </div>
-        </div>
-        <div className="projects-item__details">
-          <ul>
-            <li>React</li>
-            <li>React Router</li>
-            <li>Redux</li>
-            <li>Redux Persist</li>
-            <li>Google Map React</li>
-            <li>React Image Gallery</li>
-            <li>Day.js</li>
-            <li>BEM</li>
-            <li>Express.js</li>
-            <li>MySQL</li>
-          </ul>
-        </div>
-      </div>
-      <div className="projects-item">
-        <div>
-          <p className="projects-item__project-name">Praga Niezwykła</p>
-          <div className="projects-item__photo"></div>
-          <div className="projects-item__buttons">
-            <a href="https://www.facebook.com/violinek123" target="_blank" rel="noreferrer">LIFE</a>
-            <a href="https://www.facebook.com/violinek123" target="_blank" rel="noreferrer">CODE</a>
-          </div>
-        </div>
-        <div className="projects-item__details">
-          <ul>
-            <li>Wordpress</li>
-            <li>Woocommerce</li>
-            <li>BEM</li>
-          </ul>
-        </div>
-      </div>
-      <div className="projects-item">
-        <div>
-          <p className="projects-item__project-name">Cesar Code</p>
-          <div className="projects-item__photo"></div>
-          <div className="projects-item__buttons">
-            <a href="https://www.facebook.com/violinek123" target="_blank" rel="noreferrer">LIFE</a>
-            <a href="https://www.facebook.com/violinek123" target="_blank" rel="noreferrer">CODE</a>
-          </div>
-        </div>
-        <div className="projects-item__details">
-          <ul>
-            <li>Vanilla JS</li>
-          </ul>
-        </div>
-      </div>
-      <div className="projects-item">
-        <div>
-        <p className="projects-item__project-name">Home Page</p>
-          <div className="projects-item__photo"></div>
-          <div className="projects-item__buttons">
-            <a href="https://www.facebook.com/violinek123" target="_blank" rel="noreferrer">LIFE</a>
-            <a href="https://www.facebook.com/violinek123" target="_blank" rel="noreferrer">CODE</a>
-          </div>
-        </div>
-        <div className="projects-item__details">
-          <ul>
-            <li>React</li>
-            <li>React Styled Components</li>
-            <li>BEM</li>
-          </ul>
-        </div>
-      </div>
-      <div className="projects-item">
-        <div>
-          <p className="projects-item__project-name">Code Snippets</p>
-          <div className="projects-item__photo"></div>
-          <div className="projects-item__buttons">
-            <a href="https://www.facebook.com/violinek123" target="_blank" rel="noreferrer">LIFE</a>
-            <a href="https://www.facebook.com/violinek123" target="_blank" rel="noreferrer">CODE</a>
-          </div>
-        </div>
-        <div className="projects-item__details">
-          <ul>
-            <li>You can also check my work on Codepen</li>
-          </ul>
-        </div>
-      </div>
+        )}
     </ProjectsWrapper>
   );
 }
@@ -157,17 +73,26 @@ const ProjectsWrapper = styled.section`
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 50px;
-      font-size: 1.5rem;
+      min-height: 110px;
+      font-size: 2rem;
       border: 3px solid purple;
       background-color: purple;
     }
+    /* .projects-item__project-desc {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 70px;
+      font-size: 1.5rem;
+      border: 3px solid purple;
+      background-color: purple;
+    } */
     .projects-item__details {
       /* display: flex; */
       /* align-items: center; */
       /* justify-content: center; */
       border: 3px solid purple;
-      background-color: purple;
+      /* background-color: purple; */
       ul {
         display: flex;
         flex-direction: column;
@@ -183,10 +108,11 @@ const ProjectsWrapper = styled.section`
       }
     }
     .projects-item__photo {
-      height: 250px;
-      background-image: url(${home});
-      background-size: cover;
-      background-position: 20% top;
+      height: 180px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin: 5px 0;
       /* img {
         height: 100%;
         object-position: center center;

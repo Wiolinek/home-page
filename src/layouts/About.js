@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import photo from '../images/photo1.jpg';
 
 import styled from 'styled-components'
 
 
-const About = () => {
+const About = ({ language }) => {
 
+  const [aboutState, setAboutState] = useState();
 
+  useEffect(() => {
+    fetch(`http://localhost:3030/home_page`, {method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({language: language}),
+    })
+    .then(response => response.json())
+    .then(result => setAboutState(result))
+    .catch(error => console.log(`error ${error}`))
+  }, [language])
+  
 
   return (
     <AboutWrapper id="about">
@@ -14,15 +27,13 @@ const About = () => {
           <img src={photo} alt="Logo" />
       </div>
       <div className="section-name">
-        <h1>About Me</h1>
+        {aboutState !== undefined ? <h1>{aboutState[0].title}</h1> : null}
       </div>
-      {/* <div></div> */}
-      <article>
-        <p>Hello, my name is Wiola and I'm a junior front end developer.</p>
-        <p>I started my journey with programming in March 2020 and all you can see here is effect of my hard work during last year.</p>
-        <p>I based my knowledge and skills on on-line courses and tutorials and official documentation.</p>
-        <p>With your little help I am sure I can achieve much, much more ;)</p>
-        <p>Interested in cooperation? Just...</p>
+      <div className="about__intro">
+        {aboutState !== undefined ? <p>{aboutState[0].intro}</p> : null}
+      </div>
+      <article className="about__text">
+        {aboutState !== undefined ? <p>{aboutState[0].about}</p> : null}
       </article>
       <div className="contact-me-btn">
         <a href="#contact">Contact Me!</a>
@@ -42,6 +53,7 @@ const AboutWrapper = styled.section`
   align-items: center;
   justify-content: center;
   grid-gap: 2em;
+  grid-auto-flow: row dense;
   margin: 0 auto;
   div {
     display: flex;
@@ -56,8 +68,33 @@ const AboutWrapper = styled.section`
       font-size: 5em;
     }
   }
+  .about__intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: .5em;
+    background-color: purple;
+    border: 3px solid purple;
+    height: 100%;
+    p {
+      font-size: 1.5rem;
+      line-height: 1.8em;
+      letter-spacing: 0.05em;
+      padding: .3em;
+      white-space: pre-wrap;
+      /* font-family: 'Aldrich', sans-serif; */
+      /* font-family: 'Quantico', sans-serif; */
+      /* font-family: 'Electrolize', sans-serif; */
+      /* font-family: 'Chakra Petch', sans-serif; */
+      font-family: 'Turret Road', cursive;
+      /* font-family: 'Rationale', sans-serif; */
+      /* font-family: 'Iceland', cursive; */
+      /* font-weight: 700; */
+    }
+
+  }
   .my-photo {
-    grid-column: 1 / 3;
+    grid-column: 2 / 3;
     /* align-self: flex-start; */
     /* position: relative; */
     /* align-content: center; */
@@ -84,7 +121,7 @@ const AboutWrapper = styled.section`
       /* z-index: 0; */
     /* } */
     
-  article {
+  .about__text {
     grid-column: 1 / 4;
     display: flex;
     flex-direction: column;
@@ -94,26 +131,30 @@ const AboutWrapper = styled.section`
     height: 100%;
     p {
       font-size: 1.5rem;
-      line-height: 1.5em;
+      line-height: 1.8em;
       letter-spacing: 0.05em;
       padding: .3em;
+      white-space: pre-wrap;
       /* font-family: 'Aldrich', sans-serif; */
-    /* font-family: 'Quantico', sans-serif; */
-    /* font-family: 'Electrolize', sans-serif; */
-    /* font-family: 'Chakra Petch', sans-serif; */
-    font-family: 'Turret Road', cursive;
-    /* font-family: 'Rationale', sans-serif; */
-    /* font-family: 'Iceland', cursive; */
-    /* font-weight: 700; */
+      /* font-family: 'Quantico', sans-serif; */
+      /* font-family: 'Electrolize', sans-serif; */
+      /* font-family: 'Chakra Petch', sans-serif; */
+      font-family: 'Turret Road', cursive;
+      /* font-family: 'Rationale', sans-serif; */
+      /* font-family: 'Iceland', cursive; */
+      /* font-weight: 700; */
     }
   }
   .contact-me-btn {
+    grid-column: 4 / 5;
     a {
-      grid-column: 4 / 5;
       font-family: 'Turret Road', cursive;
-      font-size: 1.3rem;
-      padding: .5em 1em;
-      margin: 1em;
+      font-size: 2rem;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       border-color: black;
       background-color: transparent;
       color: white;
@@ -121,11 +162,10 @@ const AboutWrapper = styled.section`
       outline: none;
       text-decoration: none;
       cursor: pointer;
-      transition: .5s;
+      transition: background-color .5s;
     }
     a:hover {
       background-color: purple;
-      box-shadow: 0 0 20px purple, 0 0 50px purple, 0 0 80px purple, 0 0 110px purple;
     }
   }
 `

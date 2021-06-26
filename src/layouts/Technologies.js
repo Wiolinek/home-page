@@ -1,77 +1,46 @@
-import React from 'react';
-import redux from '../images/redux.webp';
-import svelte from '../images/svelte.webp';
-import stylComp from '../images/style-comp.png';
-import gsap from '../images/gsap.webp';
-import woo from '../images/woo.svg';
-import mysql from '../images/mysql.webp';
-import vsc from '../images/vsc.svg';
-import gimp from '../images/gimp.svg';
+import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components'
 
 
-const Technologies = () => {
+const Technologies = ({ language }) => {
+
+  // const [techTitleState, setTechTitleState] = useState();
+
+  // useEffect(() => {
+  //   fetch(`http://localhost:3030/technologies`, {method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({language: language}),
+  //   })
+  //   .then(response => response.json())
+  //   .then(result => setTechTitleState(result))
+  //   .catch(error => console.log(`error ${error}`))
+  // }, [language])
+
+  const [technologiesState, setTechnologiesState] = useState();
+
+  useEffect(() => {
+    fetch(`http://localhost:3030/technologies`)
+    .then(response => response.json())
+    .then(result => setTechnologiesState(result))
+    .catch(error => console.log(`error ${error}`))
+  }, [language])
+
+
 
   return (
     <TechnologiesWrapper id="technologies">
       <div className="technologies__section-name">
         <h1>Technologies</h1>
+        {/* {techTitleState !== undefined ? <h1>{techTitleState[0].title}</h1> : null} */}
       </div>
-      <div className="technologies__item" name="HTML">
-        <i className="fab fa-html5"></i>
-      </div>
-      <div className="technologies__item" name="CSS">
-        <i className="fab fa-css3-alt"></i>
-      </div>
-      <div className="technologies__item" name="SASS">
-        <i className="fab fa-sass"></i>
-      </div>
-      <div className="technologies__item" name="Styled Components">
-        <img src={stylComp} alt="Logo" />
-      </div>
-      <div className="technologies__item" name="GSAP">
-        <img src={gsap} alt="Logo" />
-      </div>
-      <div className="technologies__item" name="JavaScript">
-        <i className="fab fa-js-square"></i>
-      </div>
-      <div className="technologies__item" name="React">
-        <i className="fab fa-react"></i>
-      </div>
-      <div className="technologies__item" name="Redux">
-        <img src={redux} alt="Logo"/>
-      </div>
-      <div className="technologies__item" name="Svelte">
-        <img src={svelte} alt="Logo" width="140"/>
-      </div>
-      <div className="technologies__item" name="Node.js">
-        <i className="fab fa-node"></i>
-      </div>
-      <div className="technologies__item" name="Express">
-        <p>Express</p>
-      </div>
-      <div className="technologies__item" name="Wordpress">
-        <i className="fab fa-wordpress-simple"></i>
-      </div>
-      <div className="technologies__item" name="Woocommerce">
-        <img src={woo} alt="Logo"/>
-      </div>
-      <div className="technologies__item" name="MySQL">
-        <img src={mysql} alt="Logo"/>
-      </div>
-      <div className="technologies__item" name="NPM">
-        <i className="fab fa-npm"></i>
-      </div>
-      <div className="technologies__item" name="Git">
-        <i className="fab fa-git-alt"></i>
-      </div>
-      <div className="technologies__item" name="Visual Studio Code">
-        <img src={vsc} alt="Logo" width="150"/>
-      </div>
-      <div className="technologies__item" name="Gimp">
-        <img src={gimp} alt="Logo" width="200"/>
-      </div>
+      {technologiesState !== undefined && technologiesState.map(technologie => 
+        <div key={technologie.id} className="technologies__item" name={technologie.name}>
+          <img src={technologie.image} alt={technologie.name}/>
+        </div>
+        )}
     </TechnologiesWrapper>
   );
 }
@@ -97,10 +66,6 @@ const TechnologiesWrapper = styled.section`
     position: relative;
     h1 {
       font-size: 5em;
-    }
-    i {
-      font-size: 10em;
-      color: purple;
     }
     img {
       max-width: 50%;
@@ -128,7 +93,7 @@ const TechnologiesWrapper = styled.section`
     justify-content: center;
     text-align: center;
     opacity: 0;
-    transition: opacity .5s;
+    transition: opacity .6s;
   }
   .technologies__item:hover::before {
       opacity: 1;

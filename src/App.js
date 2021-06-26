@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 import Navigation from './layouts/Navigation';
 import Main from './layouts/Main';
@@ -15,37 +15,26 @@ import back from './images/back.jpg';
 
 const App = () => {
 
-  const [languageState, setLanguageState] = useState('PL');
-
-  const changeLanguageHandler = () => {
-    setLanguageState();
+  const [languageState, setLanguageState] = useState('eng');
+  
+  const changeLanguageHandler = (e) => {
+    setLanguageState(e.currentTarget.textContent);
   }
-
 
   return (
     <>
-    {/* <Reset /> */}
       <AppWrapper>
-        <Navigation />
-        <Main />
-        <About />
-        <Technologies />
-        <Projects />
-        <Contact />
+        <Navigation language={languageState}/>
+        <Main changeLanguageHandler={changeLanguageHandler}/>
+        <About language={languageState}/>
+        <Technologies language={languageState}/>
+        <Projects/>
+        <Contact language={languageState}/>
         <Footer />
       </AppWrapper>
     </>
   );
 }
-
-// const rotate = keyframes`
-//   from {
-//     transform: rotate (0deg);
-//   }
-//   to {
-//     transform: rotate (360deg);
-//   }
-// `;
 
 const AppWrapper = styled.div`
   background: url(${back});

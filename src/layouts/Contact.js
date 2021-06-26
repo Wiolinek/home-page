@@ -1,44 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components'
 
-const Contact = () => {
+const Contact = ({ language }) => {
 
   const logo = `< UV />`;
+
+  const [contactState, setContactState] = useState();
+
+  useEffect(() => {
+    fetch(`http://localhost:3030/contact`, {method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({language: language}),
+    })
+    .then(response => response.json())
+    .then(result => setContactState(result))
+    .catch(error => console.log(`error ${error}`))
+  }, [language])
+
 
   return (
     <ContactWrapper id="contact">
       <div className="contact-section__wrapper">
         <div className="contact-section__section-name">
-          <h1>Contact</h1>
+          {contactState !== undefined ? <h1>{contactState[0].title}</h1> : null}
         </div>
         <div className="contact-section__address">
-          <p>Wiola Polok</p>
-          <p>Praga, Republika Czeska</p>
-          <p>+ 48 533 484 335</p>
-          <p>+ 420 731 880 053</p>
-          <p>wiola.polok@seznam.cz</p>
+          {contactState !== undefined ? (
+          <>
+            <p>{contactState[0].name}</p>
+            <p>{contactState[0].address}</p>
+            <p>{contactState[0].phone1}</p>
+            <p>{contactState[0].phone2}</p>
+            <p>{contactState[0].email}</p>
+          </>
+          )
+           : null}
         </div>
-        {/* <form className="contact__form">
-            <label>Name<br/><input type="text" name="name" required></input></label>
-            <label>Email<br/><input type="email" name="mail" required></input></label>
-            <label>Subject<br/><input type="text" name="subject" required></input></label>
-            <label>Message<br/><textarea name="message" rows="6" cols="50" required></textarea></label>
-            <button className="btn contact__btn" type="submit">Send</button>
-        </form> */}
         <div className="contact-section__socials">
           <a href="https://www.facebook.com/violinek123"><i className="fab fa-facebook-f"></i></a>
           <a href="https://www.facebook.com/violinek123"><i className="fab fa-facebook-messenger"></i></a>
           <a href="https://www.linkedin.com/in/wioleta-polok-44248917/"><i className="fab fa-linkedin-in"></i></a>
           <a href="https://github.com/Wiolinek"><i className="fab fa-github"></i></a>
           <a href="https://codepen.io/wiola-p"><i className="fab fa-codepen"></i></a>
-          {/* <a href="https://www.facebook.com/violinek123"><i class="fab fa-slack"></i></a> */}
-          {/* <a href="https://www.facebook.com/violinek123"><i class="fab fa-discord"></i></a> */}
         </div>
         <p className="contact-section__logo">{logo}</p>
         <div className="half-back"></div>
       </div>
-      
     </ContactWrapper>
   );
 }
@@ -109,9 +119,17 @@ const ContactWrapper = styled.section`
       border-radius: 50%;
       margin: .5em 1.5em;
       text-decoration: none;
+      transition: border .5s;
+      &:hover {
+        border: 2px solid white;
+      }
+      &:hover i {
+          color: white;
+      }
       i {
         color: black;
         font-size: 1.7rem;
+        transition: color .5s;
       }
     }
   }
