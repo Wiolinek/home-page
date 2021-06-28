@@ -1,15 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
 
-import styled from 'styled-components'
-// import back from '../images/back.jpg';
 
-const Main = ({ changeLanguageHandler }) => {
+const Main = ({ menuState, changeLanguageHandler }) => {
 
   const tagline = "<Coding with {Passion}>";
   const logo = `< UV />`;
 
   return (
-    <MainWrapper id="home">
+    <MainWrapper id={menuState !== undefined ? menuState.link : 'home'}>
       <div>
         <div className="logo">
           <p>{logo}</p>

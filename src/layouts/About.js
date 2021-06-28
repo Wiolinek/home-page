@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import photo from '../images/photo1.jpg';
+import styled from 'styled-components';
 
-import styled from 'styled-components'
 
-
-const About = ({ language }) => {
+const About = ({ language, menuState }) => {
 
   const [aboutState, setAboutState] = useState();
 
@@ -22,12 +21,12 @@ const About = ({ language }) => {
   
 
   return (
-    <AboutWrapper id="about">
+    <AboutWrapper id={menuState !== undefined ? menuState.link : 'about'}>
       <div className="my-photo">
           <img src={photo} alt="Logo" />
       </div>
       <div className="section-name">
-        {aboutState !== undefined ? <h1>{aboutState[0].title}</h1> : null}
+        <h1>{menuState !== undefined ? menuState.name : 'About Me'}</h1>
       </div>
       <div className="about__intro">
         {aboutState !== undefined ? <p>{aboutState[0].intro}</p> : null}
@@ -36,7 +35,7 @@ const About = ({ language }) => {
         {aboutState !== undefined ? <p>{aboutState[0].about}</p> : null}
       </article>
       <div className="contact-me-btn">
-        <a href="#contact">Contact Me!</a>
+        <a href="#contact">{aboutState !== undefined ? aboutState[0].button : 'Contact Me!'}</a>
       </div>
     </AboutWrapper>
   );
@@ -150,6 +149,10 @@ const AboutWrapper = styled.section`
     a {
       font-family: 'Turret Road', cursive;
       font-size: 2rem;
+      padding: 1.7em;
+      line-height: 1.8em;
+      color: white;
+      text-align: center;
       height: 100%;
       width: 100%;
       display: flex;
@@ -157,7 +160,6 @@ const AboutWrapper = styled.section`
       align-items: center;
       border-color: black;
       background-color: transparent;
-      color: white;
       border-style: none;
       outline: none;
       text-decoration: none;

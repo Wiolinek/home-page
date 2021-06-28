@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
-import styled from 'styled-components'
 
-
-const Projects = ({ language }) => {
+const Projects = ({ language, menuState }) => {
 
   const [projectsState, setProjectsState] = useState();
 
@@ -14,10 +13,11 @@ const Projects = ({ language }) => {
     .catch(error => console.log(`error ${error}`))
   }, [language])
   
+
   return (
-    <ProjectsWrapper id="projects">
+    <ProjectsWrapper id={menuState !== undefined ? menuState.link : 'projects'}>
       <div className="projects-item section-name">
-        <h1>Projects</h1>
+        <h1>{menuState !== undefined ? menuState.name : 'Projects'}</h1>
       </div>
         {projectsState !== undefined && projectsState.map(project => 
         <div key={project.name + project.language} className="projects-item">
@@ -44,7 +44,6 @@ const Projects = ({ language }) => {
 
 const ProjectsWrapper = styled.section`
   background-color: rgba(0, 0, 0, .75);
-  /* min-height: 100vh; */
   color: white;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(737px, 740px));

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
-import styled from 'styled-components'
 
-const Contact = ({ language }) => {
+const Contact = ({ language, menuState }) => {
 
   const logo = `< UV />`;
 
@@ -22,10 +22,10 @@ const Contact = ({ language }) => {
 
 
   return (
-    <ContactWrapper id="contact">
+    <ContactWrapper id={menuState !== undefined ? menuState.link : 'contact'}>
       <div className="contact-section__wrapper">
         <div className="contact-section__section-name">
-          {contactState !== undefined ? <h1>{contactState[0].title}</h1> : null}
+          <h1>{menuState !== undefined ? menuState.name : 'Contact'}</h1>
         </div>
         <div className="contact-section__address">
           {contactState !== undefined ? (

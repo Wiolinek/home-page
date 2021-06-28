@@ -1,29 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import styled from 'styled-components';
 
-import styled from 'styled-components'
 
-
-const Navigation = ({ language }) => {
-
-  const [menuState, setMenuState] = useState();
-
-  useEffect(() => {
-    fetch(`http://localhost:3030/menu`, {method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({language: language}),
-    })
-    .then(response => response.json())
-    .then(result => setMenuState(result))
-    .catch(error => console.log(`error ${error}`))
-  }, [language])
+const Navigation = ({ menu }) => {
 
 
   return (
     <NavigationWrapper>
       <ul>
-        {menuState !== undefined && menuState.map(item => <li key={item.name + item.language}><a href={ `#${item.link}`}>{item.name}</a></li>)}
+        {menu !== undefined && menu.map(item => <li key={item.name + item.language}><a href={ `#${item.link}`}>{item.name}</a></li>)}
       </ul>
     </NavigationWrapper>
   );
@@ -38,28 +23,21 @@ const NavigationWrapper = styled.nav`
   position: fixed;
   top: 2vh;
   right: 0;
-  /* width: 100%; */
-  /* background-color: red; */
-  
   z-index: 2;
   ul {
     min-height: 7vh;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    /* background-color: yellow; */
     li {
     margin: 0 .8em;
     text-align: center;
     position: relative;
     cursor: pointer;
-    /* transition: .5s; */
     height: 100%;
     padding: 1em 1.3em;
     overflow: hidden;
-    /* background-color: green; */
       a {
-        /* background-color: red; */
         font-size: 1.8rem;
         letter-spacing: 0.05em;
         color: white;
@@ -89,7 +67,6 @@ const NavigationWrapper = styled.nav`
       width: 55px;
       bottom: 50%;
       /* box-shadow: 0 0 20px purple, 0 0 50px purple, 0 0 80px purple, 0 0 110px purple; */
-      /* right: 110%; */
     }
   }
 `

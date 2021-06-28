@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
-import styled from 'styled-components'
 
-
-const Technologies = ({ language }) => {
+const Technologies = ({ language, menuState }) => {
 
   // const [techTitleState, setTechTitleState] = useState();
 
@@ -29,12 +28,10 @@ const Technologies = ({ language }) => {
   }, [language])
 
 
-
   return (
-    <TechnologiesWrapper id="technologies">
+    <TechnologiesWrapper id={menuState !== undefined ? menuState.link : 'technologies'}>
       <div className="technologies__section-name">
-        <h1>Technologies</h1>
-        {/* {techTitleState !== undefined ? <h1>{techTitleState[0].title}</h1> : null} */}
+        <h1>{menuState !== undefined ? menuState.name : 'Technologies'}</h1>
       </div>
       {technologiesState !== undefined && technologiesState.map(technologie => 
         <div key={technologie.id} className="technologies__item" name={technologie.name}>
