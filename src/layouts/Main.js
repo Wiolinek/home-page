@@ -63,10 +63,11 @@ const MainWrapper = styled.section`
       min-height: 7vh;
       button {
         font-family: 'Turret Road', cursive;
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         color: white;
         text-align: center;
-        padding: 0 .8em;
+        width: 120px;
+        padding: .5em 0;
         margin: 0 1em;
         border-color: black;
         text-transform: uppercase;
@@ -77,8 +78,9 @@ const MainWrapper = styled.section`
         transition: all .5s;
       }
       button:hover {
-        background-color: purple;
-        box-shadow: 0 0 20px purple, 0 0 50px purple, 0 0 80px purple, 0 0 110px purple;
+        box-shadow: inset 0 0 6px 2px purple, 0 0 8px 2px purple;
+        color: purple;
+        text-shadow: 1px 1px 10px purple;
       }
     }
   }

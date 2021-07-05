@@ -44,16 +44,15 @@ const Technologies = ({ language, menuState }) => {
 
 const TechnologiesWrapper = styled.section`
   background-color: rgba(0, 0, 0, .75);
-  min-height: 100vh;
   color: white;
-  padding: 10vh 1vw;
+  padding: 10vh 1vw 30vh 1vw;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, 350px);
   grid-auto-rows: 350px;
   align-items: center;
   justify-content: center;
   grid-gap: 2em;
-  margin: 0 auto;
   .technologies__item, .technologies__section-name {
     display: flex;
     align-items: center;
@@ -61,12 +60,16 @@ const TechnologiesWrapper = styled.section`
     border: 3px solid purple;
     height: 100%;
     position: relative;
+    transition: all .5s;
     h1 {
       font-size: 5em;
     }
     img {
-      max-width: 50%;
+      /* max-width: 50%; */
     }
+  }
+  .technologies__section-name:hover, .technologies__item:hover {
+    box-shadow: inset 0 0 6px 2px purple, 0 0 8px 2px purple;
   }
   .technologies__section-name {
     grid-column: 1 / 3;

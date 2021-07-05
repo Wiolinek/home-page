@@ -43,9 +43,9 @@ const About = ({ language, menuState }) => {
 
 const AboutWrapper = styled.section`
   background-color: rgba(0, 0, 0, .75);
-  min-height: 100vh;
   color: white;
-  padding: 10vh 1vw;
+  padding: 10vh 1vw 30vh 1vw;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, 350px);
   grid-auto-rows: 350px;
@@ -53,13 +53,16 @@ const AboutWrapper = styled.section`
   justify-content: center;
   grid-gap: 2em;
   grid-auto-flow: row dense;
-  margin: 0 auto;
   div {
     display: flex;
     align-items: center;
     justify-content: center;
     border: 3px solid purple;
     height: 100%;
+    transition: all .5s;
+  }
+  div:hover {
+    box-shadow: inset 0 0 6px 2px purple, 0 0 8px 2px purple;
   }
   .section-name {
     grid-column: 3 / 5;
@@ -128,6 +131,7 @@ const AboutWrapper = styled.section`
     padding: .5em;
     border: 3px solid purple;
     height: 100%;
+    transition: all .5s;
     p {
       font-size: 1.5rem;
       line-height: 1.8em;
@@ -143,6 +147,9 @@ const AboutWrapper = styled.section`
       /* font-family: 'Iceland', cursive; */
       /* font-weight: 700; */
     }
+  }
+  .about__text:hover {
+    box-shadow: inset 0 0 6px 2px purple, 0 0 8px 2px purple;
   }
   .contact-me-btn {
     grid-column: 4 / 5;
@@ -164,10 +171,13 @@ const AboutWrapper = styled.section`
       outline: none;
       text-decoration: none;
       cursor: pointer;
-      transition: background-color .5s;
+      transition: all .5s;
     }
     a:hover {
-      background-color: purple;
+      background-color: rgba(0, 0, 0, .75);
+      box-shadow: inset 0 0 6px 2px purple, 0 0 8px 2px purple;
+      color: purple;
+      text-shadow: 1px 1px 10px purple;
     }
   }
 `
