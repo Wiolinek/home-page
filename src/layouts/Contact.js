@@ -47,7 +47,6 @@ const Contact = ({ language, menuState }) => {
           <a href="https://codepen.io/wiola-p"><i className="fab fa-codepen"></i></a>
         </div>
         <p className="contact-section__logo">{logo}</p>
-        <div className="half-back"></div>
       </div>
     </ContactWrapper>
   );
@@ -56,20 +55,11 @@ const Contact = ({ language, menuState }) => {
 const ContactWrapper = styled.section`
   color: white;
   padding: 10vh 1vw;
-  position: relative;
-  .half-back {
-      width: 0;
-      height: 0;
-      border-top: 120vh solid rgba(0, 0, 0, .75);
-      border-right: 125vw solid transparent;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-  }
+  background-color: rgba(0, 0, 0, .75);
   .contact-section__wrapper {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(737px, 740px));
-    grid-template-rows: repeat(auto-fill, minmax(350px, 1fr));
+    /* grid-template-rows: repeat(auto-fill, minmax(350px, 1fr)); */
     grid-auto-rows: 350px;
     justify-content: center;
     grid-gap: 2em;
@@ -81,8 +71,9 @@ const ContactWrapper = styled.section`
       display: flex;
       justify-content: center;
       align-items: center;
-      grid-column: 1 / 2;
+      /* grid-column: 1 / 2; */
       z-index: 2;
+      transition: all .5s;
       h1 {
         font-size: 5em;
       }
@@ -94,8 +85,9 @@ const ContactWrapper = styled.section`
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      grid-column: 2 / 3;
+      /* grid-column: 2 / 3; */
       z-index: 2;
+      transition: all .5s;
       p {
         font-size: 1.8em;
         line-height: 1.5em;
@@ -104,30 +96,37 @@ const ContactWrapper = styled.section`
       }
     }
   .contact-section__socials {
-    background-color: purple;
+    border: 3px solid purple;
+    /* background-color: purple; */
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2;
+    transition: all .5s;
     a {
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid black;
+      border: 2px solid white;
       height: 3.5rem;
       width: 3.5rem;
       border-radius: 50%;
       margin: .5em 1.5em;
       text-decoration: none;
-      transition: border .5s;
+      transition: all .5s;
       &:hover {
-        border: 2px solid white;
+        border: 2px solid purple;
+        background-color: rgba(0, 0, 0, .75);
+        box-shadow: inset 0 0 6px 2px purple, 0 0 8px 2px purple;
       }
       &:hover i {
-          color: white;
+        /* color: white; */
+        color: purple;
+        text-shadow: 1px 1px 5px purple;
       }
       i {
-        color: black;
+        /* color: black; */
+        color: white;
         font-size: 1.7rem;
         transition: color .5s;
       }
@@ -141,7 +140,11 @@ const ContactWrapper = styled.section`
     color: white;
     border: 3px solid purple;
     z-index: 2;
+    transition: all .5s;
   }
+  .contact-section__section-name:hover, .contact-section__socials:hover, .contact-section__address:hover, .contact-section__logo:hover {
+      box-shadow: inset 0 0 6px 2px purple, 0 0 8px 2px purple;
+    }
 `
 
 export default Contact;

@@ -6,7 +6,7 @@ const Footer = () => {
 
   return (
     <FooterWrapper>
-      <p>All rights reserved 2021</p>
+      <p>Copyright © 2021 Wiola Polok ultra-violet.codes</p>
     </FooterWrapper>
   );
 }
