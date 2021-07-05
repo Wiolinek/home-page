@@ -40,11 +40,11 @@ const App = () => {
     <>
       <AppWrapper>
         <Navigation menu={menuState}/>
-        <Main menuState={menuState[0]} changeLanguageHandler={changeLanguageHandler}/>
-        <About language={languageState} menuState={menuState[1]}/>
-        <Technologies language={languageState} menuState={menuState[2]}/>
-        <Projects menuState={menuState[3]}/>
-        <Contact language={languageState} menuState={menuState[4]}/>
+        <Main menuState={menuState[4]} changeLanguageHandler={changeLanguageHandler}/>
+        <About language={languageState} menuState={menuState[0]}/>
+        <Technologies language={languageState} menuState={menuState[1]}/>
+        <Projects menuState={menuState[2]}/>
+        <Contact language={languageState} menuState={menuState[3]}/>
         <Footer />
       </AppWrapper>
     </>
@@ -56,9 +56,6 @@ const AppWrapper = styled.div`
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
-  /* width: 100vw; */
-  /* min-height: 700vh; */
-  /* display: flex; */
 `
 
 export default App;
