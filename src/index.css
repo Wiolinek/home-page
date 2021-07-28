@@ -1,20 +1,27 @@
+:root {
+    --primary-color: rgba(92, 0, 92, 1);
+    --secondary-color: rgba(0, 0, 0, .88);
+    /* --primary-font-family: 'Aldrich', sans-serif; */
+    /* --primary-font-family: 'Quantico', sans-serif; */
+    /* --primary-font-family: 'Electrolize', sans-serif; */
+    /* --primary-font-family: 'Chakra Petch', sans-serif; */
+    --primary-font-family: 'Turret Road', cursive;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-size: 16px;
-    /* background-color: rgba(0, 0, 0, .8); */
-    overflow-x: hidden;
-      /* font-family: 'Aldrich', sans-serif; */
-  /* font-family: 'Quantico', sans-serif; */
-  /* font-family: 'Electrolize', sans-serif; */
-  /* font-family: 'Chakra Petch', sans-serif; */
-    font-family: 'Turret Road', cursive;
-  /* font-family: 'Rationale', sans-serif; */
-  /* font-family: 'Iceland', cursive; */
+    /* overflow-x: hidden; */
+    font-family: var(--primary-font-family);
   /* font-weight: 700; */
     scroll-behavior: smooth;
-  }
+}
+
+body {
+    background-color: var(--primary-color);
+}
 
 
 
@@ -26,36 +33,36 @@
 
 @media (max-width: 1280px) {
     * {
-        font-size: 15px;
+        font-size: 14px;
     }
 }
 
 @media (max-width: 1024px) {
     * {
-        font-size: 14px;
+        font-size: 13px;
     }
 }
 
 @media (max-width: 768px) {
     * {
-        font-size: 13px;
+        font-size: 12px;
     }
 }
 
 @media (max-width: 640px) {
     * {
-        font-size: 12px;
+        font-size: 11px;
     }
 }
 
 @media (max-width: 460px) {
     * {
-        font-size: 11px;
+        font-size: 10px;
     }
 }
 
 @media (max-width: 320px) {
     * {
-        font-size: 10px;
+        font-size: 9px;
     }
 }

@@ -1,92 +1,221 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 
+import { darkTheme } from '../providers/themes';
+import { device } from '../providers/breakpoints';
 
-const Navigation = ({ menu }) => {
+import MenuModal from './MenuModal';
 
+
+const Navigation = ({ menu, theme, toggleTheme, changeLanguageHandler, hoverSetHandler, hoverOffHandler, navbarColorState }) => {
+  
+  const logo = `< UV />`;
+
+  const [menuModalState, setMenuModalState] = useState(false);
+
+  const menuModalHandler = () => {
+    setMenuModalState(true);
+  }
+  
 
   return (
     <NavigationWrapper>
-      <ul>
-        {menu !== undefined && menu.map(item => <li key={item.name + item.language}><a href={ `#${item.link}`}>{item.name}</a></li>)}
-      </ul>
+      <div className={navbarColorState ? "nav-container scroll" : "nav-container static"}>
+        <div className="logo">
+          <a href="/#">
+            <div className="logo__logo">
+              <p>{logo}</p>
+            </div>
+            <div className="logo__name" >
+              <p>Ultra</p>
+              <p>Violet</p>
+              <p>Codes</p>
+            </div> 
+          </a>
+        </div>
+        <div className="navigation">
+          <div className="navigation__lang">
+            <button onClick={changeLanguageHandler} onMouseEnter={hoverSetHandler} onMouseLeave={hoverOffHandler}>eng</button>
+            <button onClick={changeLanguageHandler} onMouseEnter={hoverSetHandler} onMouseLeave={hoverOffHandler}>cz</button>
+            <button onClick={changeLanguageHandler} onMouseEnter={hoverSetHandler} onMouseLeave={hoverOffHandler}>pl</button>
+          </div>
+
+          <ul className="menu__list">
+            {menu !== undefined && menu.map(item => <li key={item.name + item.language} className="menu__item" onMouseEnter={hoverSetHandler} onMouseLeave={hoverOffHandler}><a href={ `#${item.link}`}>{item.name}</a></li>)}
+          </ul>
+
+          <div className="menu-icon" onClick={menuModalHandler}><i className="fas fa-ellipsis-h"></i></div>
+
+          <div className="theme-change-icon" onClick={toggleTheme} onMouseEnter={hoverSetHandler} onMouseLeave={hoverOffHandler}>
+          {theme === darkTheme ?
+            <i className="fas fa-sun"></i> :
+            <i className="fas fa-moon"></i>
+          }
+          </div>
+
+        </div>
+      </div>
+
+      {menu && <MenuModal menu={menu} menuModalState={menuModalState} setMenuModalState={setMenuModalState}/>}
     </NavigationWrapper>
   );
 }
 
 const NavigationWrapper = styled.nav`
-  font-family: 'Turret Road', cursive;
+.nav-container {
+  cursor: none;
+  /* width: 100%; */
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  list-style: none;
+  justify-content: space-between;
+  @media ${device.mobileXS} {
+    padding: 0 1.1em;
+  }
+  @media ${device.mobileS} {
+    padding: 0 1.2em;
+  }
+  @media ${device.mobileM} {
+    padding: 0 2.2em;
+  }
+  @media ${device.mobileL} {
+    padding: 0 4.2em;
+  }
+}
+  font-family: var(--primary-font-family);
+  width: 100%;
   position: fixed;
-  top: 2vh;
+  top: 1.3vh;
   right: 0;
-  z-index: 20;
-  ul {
-    min-height: 7vh;
+  z-index: 1;
+.scroll {
+  background-color: ${props => props.theme.background};
+}
+.static {
+  background-color: transparent;
+}
+  .logo {
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      cursor: none;
+      .logo__logo p {
+        font-size: 2.4rem;
+        padding: .1em .27em;
+        font-weight: ${props => props.theme.fontWeight};
+        color: ${props => props.theme.textColor};
+      }
+      .logo__name {
+        padding: .1em;
+        border-left: 3px solid ${props => props.theme.textColor};
+        display: none;
+        p {
+          font-size: 1.5rem;
+          padding-left: .4em;
+          letter-spacing: .05em;
+          font-weight: ${props => props.theme.fontWeight};
+          color: ${props => props.theme.textColor};
+        }
+        @media ${device.mobileL} {
+          display: block;
+        }
+      }
+    }
+  }
+  .navigation {
+    width: 60%;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
-    li {
-      margin: 0 .8em;
-      text-align: center;
-      position: relative;
-      cursor: pointer;
-      height: 100%;
-      padding: 1em 1.3em;
-      overflow: hidden;
-      transition: all .7s;
-      a {
-        font-size: 1.8rem;
-        letter-spacing: 0.05em;
-        color: white;
-        text-decoration: none;
-        transition: all .7s;
+    justify-content: space-between;
+    cursor: none;
+    @media ${device.laptopS} {
+      width: 40%;
+    }
+    .navigation__lang {
+      width: 90%;
+      display: flex;
+      align-items: center;
+      padding: .1em .8em;
+      @media ${device.mobileL} {
+        width: 70%;
+      }
+      @media ${device.mobileM} {
+        width: 80%;
+      }
+      button {
+        font-family: var(--primary-font-family);
+        font-size: 1.2rem;
+        color: ${props => props.theme.textColor};
+        font-weight: ${props => props.theme.fontWeight};
+        text-align: center;
+        width: 25%;
+        text-transform: uppercase;
+        background-color: transparent;
+        border-style: none;
+        outline: none;
+        cursor: none;
+        transition: all .5s;
+        &:hover {
+          font-size: 2rem;
+        }
+        @media ${device.mobileM} {
+          font-size: 1.5rem;
+        }
       }
     }
-
-    li:not(:last-child):hover {
-        background-color: rgba(0, 0, 0, .75);
-        box-shadow: inset 0 0 6px 2px purple, 0 0 8px 2px purple;
-    }
-
-    li:not(:last-child):hover a {
-        color: purple;
-        text-shadow: 1px 1px 10px purple;
-    }
-
-    li:last-child {
-      border: none;
-      a {
-        font-size: 3rem;
-        font-weight: 700;
+    .menu__list {
+      flex-direction: column;
+      width: 65%;
+      display: none;
+      @media ${device.laptopS} {
+        display: block;
+      }
+      .menu__item {
+        list-style: none;
+        margin: .3em 0;
+        a {
+          font-size: 1.2rem;
+          padding: .2em .5em;
+          letter-spacing: .05em;
+          color: ${props => props.theme.textColor};
+          font-weight: ${props => props.theme.fontWeight};
+          text-decoration: none;
+          cursor: none;
+          transition: all .5s;
+          &:hover {
+            letter-spacing: .2em;
+          }
+        }
       }
     }
-
-    /* li:not(:last-child)::before { */
-    /* content: ''; */
-    /* position: absolute; */
-    /* bottom: 5%; */
-    /* left: -110%; */
-    /* left: 0; */
-    /* right: 0; */
-    /* height: 1px; */
-    /* width: 50%; */
-    /* border-radius: 50%; */
-    /* background-color: purple; */
-    /* box-shadow: 0 0 10px 3px purple, 0 0 20px 3px purple, 0 0 25px 10px purple; */
-    /* transition: all 1s; */
-    /* } */
-    /* li:hover::before { */
-      /* left: 110%; */
-      /* height: 55px; */
-      /* width: 55px; */
-      /* bottom: 50%; */
-      /* box-shadow: 0 0 20px purple, 0 0 50px purple, 0 0 80px purple, 0 0 110px purple; */
-    /* } */
+    .theme-change-icon {
+      width: 20%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      i {
+        font-size: 2.1rem;
+        color: ${props => props.theme.textColor};
+        transform: rotate(15deg);
+        transition: all .5s;
+        &:hover {
+          font-size: 2.8rem;
+          transform: rotate(-20deg);
+        }
+      }
+    }
+    .menu-icon {
+      display: block;
+      @media ${device.laptopS} {
+        display: none;
+      }
+      i {
+        font-size: 1.6rem;
+        color: ${props => props.theme.textColor};
+      }
+    }
   }
 `
 
-export default Navigation;
+export default React.memo(Navigation);

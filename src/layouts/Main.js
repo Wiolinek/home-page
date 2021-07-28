@@ -1,89 +1,167 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { device } from '../providers/breakpoints';
 
-const Main = ({ menuState, changeLanguageHandler }) => {
+
+const Main = ({ about }) => {
 
   const tagline = "<Coding with {Passion}>";
-  const logo = `< UV />`;
+
+
+  let grid = [];
+  for (let i = 0; i < 90; i++) {
+    grid.push(<div key={'grid' + i} className="grid-item"></div>);
+  }
 
   return (
-    <MainWrapper id={menuState !== undefined ? menuState.link : 'home'}>
-      <div>
-        <div className="logo">
-          <p>{logo}</p>
-        </div>
-        <div className="half-back"></div>
-        <p>{tagline}</p>
-        <aside>
-          <button onClick={changeLanguageHandler}>eng</button>
-          <button onClick={changeLanguageHandler}>cz</button>
-          <button onClick={changeLanguageHandler}>pl</button>
-        </aside>
-      </div>
+    <MainWrapper id="home">
+      {grid}
+      <p className="main__tagline">{tagline}</p>
+      {about !== undefined ? <p className="main__intro-about">{about[0].intro}</p> : null}
     </MainWrapper>
   );
 }
 
 const MainWrapper = styled.section`
-  min-height: 100vh;
-  color: white;
-  div {
-    .logo {
-      color: white;
-      font-size: .5rem;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-    .half-back {
-      width: 0;
-      height: 0;
-      border-bottom: 115vh solid rgba(0, 0, 0, .75);
-      border-right: 100vw solid transparent;
-    }
-    p {
-      font-size: 8em;
-      font-weight: bold;
-      line-height: 1.5em;
-      letter-spacing: 0.05em;
-      width: 57vw;
-      position: absolute;
+  height: 110vh;
+  /* width: 100; */
+  display: grid;
+  grid-row-gap: wrap;
+  grid-gap: 1px;
+  color: ${props => props.theme.textColor};
+  padding: 0 0 15vh 0;
+  margin: 0 auto;
+  overflow-y: hidden;
+  @media ${device.mobileXS} {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(auto-fill, 16.28vw);
+    grid-auto-rows: 16.28vw;
+  }
+  @media ${device.mobileS} {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(auto-fill, 16.38vw);
+    grid-auto-rows: 16.38vw;
+  }
+  @media ${device.mobileM} {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(auto-fill, 16.52vw);
+    grid-auto-rows: 16.52vw;
+  }
+  @media ${device.mobileL} {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(auto-fill, 16.52vw);
+    grid-auto-rows: 16.52vw;
+  }
+  @media ${device.tablet} {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(auto-fill, 16.56vw);
+    grid-auto-rows: 16.56vw;
+  }
+  @media ${device.laptopS} {
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(auto-fill, 14.2vw);
+    grid-auto-rows: 14.2vw;
+  }
+  @media ${device.laptopM} {
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(auto-fill, 14.21vw);
+    grid-auto-rows: 14.21vw;
+  }
+  @media ${device.laptopL} {
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(auto-fill, 14.23vw);
+    grid-auto-rows: 14.23vw;
+  }
+  .grid-item {
+    height: 100%;
+    background-color: ${props => props.theme.background};
+  }
+  .main__tagline {
+    /* font-weight: 700; */
+    /* font-family: 'Manrope', sans-serif; */
+    /* font-family: 'Roboto', sans-serif; */
+    /* font-family: 'Lato', sans-serif; */
+    /* font-family: 'Poppins', sans-serif; */
+    /* font-family: 'Ubuntu', sans-serif; */
+    /* font-family: 'Mukta', sans-serif; */
+    font-family: 'Coda', cursive;
+    text-transform: uppercase;
+    width: 65vw;
+    letter-spacing: .06em;
+    color: ${props => props.theme.textColor};
+    position: absolute;
+    left: 15vw;
+    z-index: 0;
+    @media ${device.mobileXS} { /* max-width: 319px*/
+      font-size: 3.2rem;
       top: 25vh;
-      left: 15vw;
     }
-    aside {
-      width: 100%;
-      position: absolute;
-      bottom: 2vh;
-      right: 0;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      min-height: 7vh;
-      button {
-        font-family: 'Turret Road', cursive;
-        font-size: 1.8rem;
-        color: white;
-        text-align: center;
-        width: 120px;
-        padding: .5em 0;
-        margin: 0 1em;
-        border-color: black;
-        text-transform: uppercase;
-        background-color: transparent;
-        border-style: none;
-        outline: none;
-        cursor: pointer;
-        transition: all .5s;
-      }
-      button:hover {
-        box-shadow: inset 0 0 6px 2px purple, 0 0 8px 2px purple;
-        color: purple;
-        text-shadow: 1px 1px 10px purple;
-      }
+    @media ${device.mobileS} { /* min-width: 320px*/
+      font-size: 4.1rem;
+      top: 25vh;
+    }
+    @media ${device.mobileM} { /* min-width: 460px*/
+      font-size: 4.7rem;
+      top: 30vh;
+    }
+    @media ${device.mobileL} { /* min-width: 640px*/
+      font-size: 5.2rem;
+    }
+    @media ${device.tablet} { /* min-width: 768px*/
+      font-size: 5.5rem;
+    }
+    @media ${device.laptopS} { /* min-width: 1024px*/
+      font-size: 6.3rem;
+    }
+    @media ${device.laptopM} { /* min-width: 1280px*/
+
+    }
+    @media ${device.laptopL} { /* min-width: 1600px*/
+
+    }
+  }
+  .main__intro-about {
+    line-height: 2em;
+    letter-spacing: .07em;
+    padding: .7em .2em 0 .2em;
+    text-transform: uppercase;
+    color: ${props => props.theme.text};
+    font-weight: ${props => props.theme.fontWeight};
+    border-top: 2px solid ${props => props.theme.text};
+    white-space: pre-wrap;
+    width: 65vw;
+    z-index: -1;
+    position: absolute;
+    top: 67vh;
+    left: 15vw;
+    z-index: 0;
+    @media ${device.mobileXS} { /* max-width: 319px*/
+      font-size: 1.15rem;
+      top: 65vh;
+    }
+    @media ${device.mobileS} { /* min-width: 320px*/
+      font-size: 1.3rem;
+    }
+    @media ${device.mobileM} { /* min-width: 460px*/
+      font-size: 1.5rem;
+    }
+    @media ${device.mobileL} { /* min-width: 640px*/
+      font-size: 1.6rem;
+    }
+    @media ${device.tablet} { /* min-width: 768px*/
+
+    }
+    @media ${device.laptopS} { /* min-width: 1024px*/
+
+    }
+    @media ${device.laptopM} { /* min-width: 1280px*/
+
+    }
+    @media ${device.laptopL} { /* min-width: 1600px*/
+
     }
   }
 `
 
-export default Main;
+export default React.memo(Main);

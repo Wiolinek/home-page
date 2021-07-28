@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="c38bec39-aca4-4c1f-b814-175a2a94896a" name="production">
+        <fileTransfer rootFolder="/usr/home/Wiolinek" accessType="SFTP" host="s54.mydevil.net" port="22" sshConfigId="82dfa48e-f1e4-423e-8ecd-30bb466154d1" sshConfig="Wiolinek@s54.mydevil.net:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
