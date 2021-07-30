@@ -1,35 +1,67 @@
-# Getting Started with Create React App
+# Ultra Violet Codes
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-www).
+> Ultra Violet Codes is a home website created as web developer portfolio. Visitor can check what technologies is used by the person and visit some projects demo versions as well as look into the source code.
 
-## Available Scripts
+Project was created to demonstrate coding and programming skill.
+
+> Live demo [_here_](https://www.example.com).
+
+
+## Table of Contents
+* [Technologies Used](#technologies-used)
+* [Screenshots](#screenshots)
+* [Setup](#setup)
+* [Project Status](#project-status)
+* [Room for Improvement](#room-for-improvement)	
+* [Contact](#contact)
+
+
+## Technologies Used
+- React
+-
+-
+-
+-
+
+
+## Screenshots
+![Example screenshot](./img/screenshot.png)
+
+
+## Setup
+
+### Getting Started with Create React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+### Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+#### `npm start`
 
-Runs the www.js in the development mode.\
+Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+#### `npm test`
 
 Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-www/docs/running-tests) for more information.
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+#### `npm run build`
 
-Builds the www.js for production to the `build` folder.\
+Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.\
-Your www.js is ready to be deployed!
+Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-www/docs/deployment) for more information.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+#### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
@@ -39,32 +71,14 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-www/docs/getting-started).
+## Project Status
+Project is: _complete_
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Room for Improvement
+- add contact form to contact section
 
-This section has moved here: [https://facebook.github.io/create-react-www.js/docs/code-splitting](https://facebook.github.io/create-react-www/docs/code-splitting)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-www.js/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-www/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-www.js/docs/making-a-progressive-web-www.js](https://facebook.github.io/create-react-www/docs/making-a-progressive-web-www)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-www.js/docs/advanced-configuration](https://facebook.github.io/create-react-www/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-www.js/docs/deployment](https://facebook.github.io/create-react-www/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-www.js/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-www/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contact
+Created by [@Wiolinek](https://www.u-v.codes) - feel free to contact me!
