@@ -17,11 +17,10 @@ Project was created to demonstrate coding and programming skill.
 
 
 ## Technologies Used
-- React
--
--
--
--
+- Create React App
+- Styled Components
+- BEM
+- GSAP
 
 
 ## Screenshots
