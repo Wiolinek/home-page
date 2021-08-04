@@ -4,7 +4,7 @@ export const lightTheme = {
     textColor: 'rgba(0, 0, 0, 1)',
     textColorOnPurple: 'rgba(255, 255, 255, .92)',
     borderColor: 'rgba(92, 0, 92, 1)',
-    fontWeight: '700',
+    fontWeight: '500',
     fontWeightOnPurple: '500',
     cursorBorderColor: 'rgba(255, 255, 255, .92)',
   }
@@ -15,7 +15,7 @@ export const lightTheme = {
     textColor: 'rgba(255, 255, 255, .92)',
     textColorOnPurple: 'rgba(0, 0, 0, .85)',
     borderColor: 'rgba(92, 0, 92, 1)',
-    fontWeight: '500',
+    fontWeight: '300',
     fontWeightOnPurple: '700',
     cursorBorderColor: 'rgba(0, 0, 0, .80)',
   }

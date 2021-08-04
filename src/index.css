@@ -1,11 +1,8 @@
 :root {
     --primary-color: rgba(92, 0, 92, 1);
     --secondary-color: rgba(0, 0, 0, .88);
-    /* --primary-font-family: 'Aldrich', sans-serif; */
-    /* --primary-font-family: 'Quantico', sans-serif; */
-    /* --primary-font-family: 'Electrolize', sans-serif; */
-    /* --primary-font-family: 'Chakra Petch', sans-serif; */
-    --primary-font-family: 'Turret Road', cursive;
+    --logo-font-family: 'Turret Road', cursive;
+    --primary-font-family: 'Titillium Web', sans-serif;
 }
 
 * {
@@ -13,9 +10,7 @@
     padding: 0;
     box-sizing: border-box;
     font-size: 16px;
-    /* overflow-x: hidden; */
     font-family: var(--primary-font-family);
-  /* font-weight: 700; */
     scroll-behavior: smooth;
 }
 

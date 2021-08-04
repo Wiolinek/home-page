@@ -12,27 +12,170 @@ gsap.registerPlugin(ScrollTrigger);
 const Projects = ({ language, menu }) => {
 
   const [projectsState, setProjectsState] = useState();
+  const [stacksState, setStacksState] = useState();
 
   useEffect(() => {
     fetch(`https://ultra-violet.codes/projects`)
     .then(response => response.json())
     .then(result => setProjectsState(result))
     .catch(error => console.log(`error ${error}`))
-  }, [language])
+  }, [])
+
+  useEffect(() => {
+    fetch(`https://ultra-violet.codes/stacks`, {method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({language: language}),
+    })
+    .then(response => response.json())
+    .then(result => setStacksState(result))
+    .catch(error => console.log(`error ${error}`))
+  }, [language]);
+
+
+  useEffect(() => {
+
+    gsap.set('.projects-item__project-name', {
+      y: -110,
+      duration: .5,
+      delay: 1,
+    });
+    
+    gsap.set('.projects-item__project-desc', {
+      x: 110,
+      duration: .3,
+    });
+
+    gsap.set('.projects-item__photo', {
+      x: -110,
+      duration: .3,
+    });
+
+    gsap.set('.projects-item__details', {
+      x: 110,
+      y: -110,
+      duration: .3,
+    });
+
+    gsap.set('.life', {
+      y: -110,
+      duration: .3,
+      delay: -1,
+    });
+
+    gsap.set('.code', {
+      x: -110,
+      duration: .3,
+      delay: -1,
+    });
+
+    gsap.set('.projects__section-name--bar', {
+      x: -110,
+      duration: .3,
+    });
+
+    gsap.set('.projects__section-name--name', {
+      x: 110,
+      duration: .3,
+    });
+
+    gsap.set('.projects-item__stack-name--replit', {
+      y: -110,
+      duration: .5,
+      delay: 1,
+    });
+
+    gsap.set('.projects-item__stack-name--stackblitz', {
+      y: 110,
+      duration: .5,
+      delay: 1,
+    });
+    
+    gsap.set('.projects-item__stack-desc', {
+      x: 110,
+      duration: .3,
+    });
+
+    gsap.set('.projects-item__stack-photo--replit', {
+      x: -110,
+      duration: .3,
+    });
+
+    gsap.set('.projects-item__stack-photo--stackblitz', {
+      y: -110,
+      duration: .3,
+    });
+
+    gsap.set('.projects-item__stack-button--replit', {
+      y: 110,
+      duration: .3,
+    });
+
+    gsap.set('.projects-item__stack-button--stackblitz', {
+      x: -110,
+      duration: .3,
+    });
+    
+    ScrollTrigger.batch('.projects__section-name', {
+      onEnter: batch => {
+        batch.forEach(element => gsap.to(element.children, {opacity: 1, x: 0, ease: 'none',
+          scrollTrigger: {
+            trigger: element,
+            start: 'top 80%',
+            end:'top 20%',
+            scrub: true,
+            toggleActions:'play restart complete reverse',
+          }
+        }))
+      },
+      once: true,
+    });
+
+    ScrollTrigger.batch('.projects-item', {
+      onEnter: batch => {
+        batch.forEach(element => gsap.to(element.children, {opacity: 1, y: 0, x: 0, ease: 'none',
+          scrollTrigger: {
+            trigger: element,
+            start: 'top 90%',
+            end:'top 50%',
+            scrub: true,
+            toggleActions:'play restart complete reverse',
+          }
+        }))
+      },
+      once: true,
+    });
+
+    ScrollTrigger.batch('.projects-item__stack-item', {
+      onEnter: batch => {
+        batch.forEach(element => gsap.to(element.children, {opacity: 1, y: 0, x: 0, ease: 'none',
+          scrollTrigger: {
+            trigger: element,
+            start: 'top 90%',
+            end:'top 50%',
+            scrub: true,
+            toggleActions:'play restart complete reverse',
+          }
+        }))
+      },
+      once: true,
+    });
+  });
   
 
   return (
-    <ProjectsWrapper id="projects">
-      <div className="projects-item section-name">
-        <p></p>
-        <h1>{menu !== undefined ? menu.name : 'Projects'}</h1>
+    <ProjectsWrapper id="projects" className="projects">
+      <div className="projects__section-name">
+        <p className="projects__section-name--bar"></p>
+        <h1 className="projects__section-name--name">{menu !== undefined ? menu.name : 'Projects'}</h1>
       </div>
-        {projectsState !== undefined && projectsState.map(project => 
-        <div key={project.name + project.language} className="projects-item">
+      <div className="projects__container">
+          {projectsState !== undefined && projectsState.map(project => 
+          <div key={project.name + project.language} className="projects-item">
             <p className="projects-item__project-name">{project.name}</p>
             <p className="projects-item__project-desc">krotki opis strony w każdym języku</p>
-            <div className="projects-item__photo" style={{backgroundImage: `url(${project.image})`}}>
-            </div>
+            <div className="projects-item__photo" style={{backgroundImage: `url(${project.image})`}}></div>
             <div className="projects-item__button life">
               <a href={project.life} target="_blank" rel="noreferrer">LIVE</a>
             </div>
@@ -50,69 +193,79 @@ const Projects = ({ language, menu }) => {
             <div className="projects-item__break"></div>
             <div className="projects-item__break"></div>
             <div className="projects-item__break"></div>
+          </div>
+          )}
+          {stacksState !== undefined &&
+            <div className="projects-item projects-item__stack-item">
+              <p className="projects-item__stack-desc">{stacksState[0].description}</p>
+              <p className="projects-item__stack-name projects-item__stack-name--replit">{stacksState[0].name}</p>
+              <p className="projects-item__stack-name projects-item__stack-name--stackblitz">{stacksState[1].name}</p>
+              <div className="projects-item__stack-photo projects-item__stack-photo--replit" style={{backgroundImage: `url(${stacksState[0].image})`}}></div>
+              <div className="projects-item__stack-photo projects-item__stack-photo--stackblitz" style={{backgroundImage: `url(${stacksState[1].image})`}}></div>
+              <div className="projects-item__stack-button projects-item__stack-button--replit">
+                <a href={stacksState[0].link} target="_blank" rel="noreferrer">CODE</a>
+              </div>
+              <div className="projects-item__stack-button projects-item__stack-button--stackblitz">
+                <a href={stacksState[1].link} target="_blank" rel="noreferrer">CODE</a>
+              </div>
+              <div className="projects-item__stack-break"></div>
+              <div className="projects-item__stack-break"></div>
+              <div className="projects-item__stack-break"></div>
+              <div className="projects-item__stack-break"></div>
+              <div className="projects-item__stack-break"></div>
+              <div className="projects-item__stack-break"></div>
+              <div className="projects-item__stack-break"></div>
+            </div>
+          }
         </div>
-        )}
     </ProjectsWrapper>
   );
 }
 
 const ProjectsWrapper = styled.section`
-  min-height: 100vh;
-  /* width: 100vw; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 15vh 0 0 0;
+  height: auto;
   color: ${props => props.theme.textColor};
-  /* overflow-x: scroll;  */
+  padding: 15vh 0 0 0;
   .projects-item {
-    width: 100%;
     display: grid;
-    grid-template-rows: repeat(3, 14.2vw);
-    grid-row-gap: wrap;
-    grid-auto-rows: 14.2vw;
     grid-gap: 1px;
-    /* width: 90vw; */
-    /* height: 100%; */
-    /* overflow: hidden; */
-    @media ${device.mobileXS} { /* max-width: 319px*/
+    width: 100%;
+    @media ${device.mobileXS} {
       grid-template-columns: repeat(6, 1fr);
       grid-template-rows: repeat(auto-fill, 16.28vw);
       grid-auto-rows: 16.28vw;
     }
-    @media ${device.mobileS} {  /* min-width: 320px*/
+    @media ${device.mobileS} {
       grid-template-columns: repeat(6, 1fr);
       grid-template-rows: repeat(auto-fill, 16.38vw);
       grid-auto-rows: 16.38vw;
     }
-    @media ${device.mobileM} { /* min-width: 460px*/
-      grid-template-columns: repeat(6, 1fr);
+    @media ${device.mobileM} { 
       grid-template-rows: repeat(auto-fill, 16.52vw);
       grid-auto-rows: 16.52vw;
     }
-    @media ${device.mobileL} { /* min-width: 640px*/
-      grid-template-columns: repeat(6, 1fr);
+    @media ${device.mobileL} { 
       grid-template-rows: repeat(auto-fill, 16.52vw);
       grid-auto-rows: 16.52vw;
     }
-    @media ${device.tablet} { /* min-width: 768px*/
-      grid-template-columns: repeat(6, 1fr);
+    @media ${device.tablet} {
       grid-template-rows: repeat(auto-fill, 16.56vw);
       grid-auto-rows: 16.56vw;
     }
-    @media ${device.laptopS} { /* min-width: 1024px*/
+    @media ${device.laptopS} {
       grid-template-columns: repeat(7, 1fr);
       grid-template-rows: repeat(auto-fill, 14.2vw);
       grid-auto-rows: 14.2vw;
     }
-    @media ${device.laptopM} { /* min-width: 1280px*/
-      grid-template-columns: repeat(7, 1fr);
+    @media ${device.laptopM} {
       grid-template-rows: repeat(auto-fill, 14.21vw);
       grid-auto-rows: 14.21vw;
     }
-    @media ${device.laptopL} {  /* min-width: 1600px*/
-      grid-template-columns: repeat(7, 1fr);
+    @media ${device.laptopL} {
       grid-template-rows: repeat(auto-fill, 14.23vw);
       grid-auto-rows: 14.23vw;
     }
@@ -121,43 +274,34 @@ const ProjectsWrapper = styled.section`
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background-color: ${props => props.theme.background};
       height: 100%;
-      font-size: 2rem;
       line-height: 1.4em;
       letter-spacing: .05em;
       text-align: center;
-      padding: .5em;
-      @media ${device.mobileXS} { /* max-width: 319px*/
+      padding: .3em;
+      background-color: ${props => props.theme.background};
+      @media ${device.mobileXS} {
         grid-column: 1 / 3;
         grid-row: 1 / 3;
+        font-size: 2.1rem;
       }
-      @media ${device.mobileS} { /* min-width: 320px*/
+      @media ${device.mobileS} {
         grid-column: 1 / 3;
         grid-row: 1 / 3;
+        font-size: 2.1rem;
       }
-      @media ${device.mobileM} { /* min-width: 460px*/
+      @media ${device.mobileM} {
         grid-column: -3 / -1;
         grid-row: 1 / 2;
       }
-      @media ${device.mobileL} { /* min-width: 640px*/
-        grid-column: -3 / -1;
-        grid-row: 1 / 2;
-      }
-      @media ${device.tablet} { /* min-width: 768px*/
-        grid-column: -3 / -1;
-        grid-row: 1 / 2;
-      }
-      @media ${device.laptopS} { /* min-width: 1024px*/
+      @media ${device.laptopS} {
         grid-column: -4 / -1;
-        grid-row: 1 / 2;
       }
-      @media ${device.laptopM} { /* min-width: 1280px*/
+      @media ${device.laptopM} {
         grid-column: 4 / 5;
-        grid-row: 1 / 2;
       }
-      @media ${device.laptopL} { /* min-width: 1600px*/
-
+      @media ${device.laptopL} {
+        font-size: 2.2rem;
       }
     }
     .projects-item__project-desc {
@@ -165,42 +309,31 @@ const ProjectsWrapper = styled.section`
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background-color: ${props => props.theme.background};
-      padding: .5em;
       font-size: 1.4rem;
       line-height: 1.4em;
       letter-spacing: .05em;
       text-align: center;
-      @media ${device.mobileXS} { /* max-width: 319px*/
+      padding: .3em;
+      background-color: ${props => props.theme.background};
+      @media ${device.mobileXS} { 
         grid-column: 3 / 7;
         grid-row: 1 / 3;
       }
-      @media ${device.mobileS} { /* min-width: 320px*/
+      @media ${device.mobileS} {
         grid-column: 3 / 7;
         grid-row: 1 / 3;
       }
-      @media ${device.mobileM} { /* min-width: 460px*/
+      @media ${device.mobileM} {
         grid-column: -3 / -1;
         grid-row: 2 / 3;
       }
-      @media ${device.mobileL} { /* min-width: 640px*/
-        grid-column: -3 / -1;
-        grid-row: 2 / 3;
-      }
-      @media ${device.tablet} { /* min-width: 768px*/
+      @media ${device.tablet} {
         grid-column: 3 / 5;
         grid-row: 3 / 4;
       }
-      @media ${device.laptopS} { /* min-width: 1024px*/
-        grid-column: 3 / 5;
-        grid-row: 3 / 4;
-      }
-      @media ${device.laptopM} { /* min-width: 1280px*/
+      @media ${device.laptopM} {
         grid-column: 4 / 5;
         grid-row: 2 / 3;
-      }
-      @media ${device.laptopL} { /* min-width: 1600px*/
-
       }
     }
     .projects-item__details {
@@ -208,39 +341,30 @@ const ProjectsWrapper = styled.section`
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: .3em;
       background-color: ${props => props.theme.background};
-      padding: .5em;
       list-style: none;
-      @media ${device.mobileXS} { /* max-width: 319px*/
+      @media ${device.mobileXS} {
         grid-column: 3 / -1;
         grid-row: 6 / 10;
       }
-      @media ${device.mobileS} { /* min-width: 320px*/
+      @media ${device.mobileS} {
         grid-column: 3 / -1;
         grid-row: 6 / 10;
       }
-      @media ${device.mobileM} { /* min-width: 460px*/
+      @media ${device.mobileM} {
         grid-column: -3 / -1;
         grid-row: 3 / 6;
       }
-      @media ${device.mobileL} { /* min-width: 640px*/
-        grid-column: -3 / -1;
-        grid-row: 3 / 6;
-      }
-      @media ${device.tablet} { /* min-width: 768px*/
-        grid-column: -3 / -1;
+      @media ${device.tablet} {
         grid-row: 2 / 4;
       }
-      @media ${device.laptopS} { /* min-width: 1024px*/
+      @media ${device.laptopS} {
         grid-column: -4 / -1;
-        grid-row: 2 / 4;
       }
-      @media ${device.laptopM} { /* min-width: 1280px*/
+      @media ${device.laptopM} {
         grid-column: 5 / 7;
         grid-row: 1 / 3;
-      }
-      @media ${device.laptopL} { /* min-width: 1600px*/
-
       }
       li {
         font-size: 1.4rem;
@@ -254,258 +378,383 @@ const ProjectsWrapper = styled.section`
       background-repeat: no-repeat;
       background-position: center;
       background-color: ${props => props.theme.background};
-      @media ${device.mobileXS} { /* max-width: 319px*/
+      @media ${device.mobileXS} {
         grid-column: 1 / 8;
         grid-row: 3 / 6;
       }
-      @media ${device.mobileS} { /* min-width: 320px*/
+      @media ${device.mobileS} {
         grid-column: 1 / 8;
         grid-row: 3 / 6;
       }
-      @media ${device.mobileM} { /* min-width: 460px*/
+      @media ${device.mobileM} {
         grid-column: 1 / 5;
         grid-row: 1 / 4;
       }
-      @media ${device.mobileL} { /* min-width: 640px*/
-        grid-column: 1 / 5;
-        grid-row: 1 / 4;
-      }
-      @media ${device.tablet} { /* min-width: 768px*/
-        grid-column: 1 / 5;
+      @media ${device.tablet} {
         grid-row: 1 / 3;
       }
-      @media ${device.laptopS} { /* min-width: 1024px*/
-        grid-column: 1 / 5;
-        grid-row: 1 / 3;
-      }
-      @media ${device.laptopM} { /* min-width: 1280px*/
+      @media ${device.laptopM} {
         grid-column: 1 / 4;
-        grid-row: 1 / 3;
-      }
-      @media ${device.laptopL} { /* min-width: 1600px*/
-
       }
     }
     .projects-item__button {
       background-color: ${props => props.theme.background};
       transition: all .5s;
       a {
-        font-family: var(--primary-font-family);
-        font-size: 2.2rem;
-        padding: 1.5em;
-        line-height: 1.4em;
-        color: ${props => props.theme.textColor};
-        font-weight: ${props => props.theme.fontWeightOnPurple};
-        height: 100%;
-        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
+        height: 100%;
+        width: 100%;
+        font-size: 2.2rem;
+        font-family: var(--primary-font-family);
+        font-weight: ${props => props.theme.fontWeightOnPurple};
+        color: ${props => props.theme.textColor};
+        text-decoration: none;
+        line-height: 1.4em;
+        padding: .5em;
         border-style: none;
         outline: none;
-        text-decoration: none;
         transition: all .5s;
         cursor: none;
       }
       &:hover {
         background-color: var(--primary-color);
         a {
-          color: ${props => props.theme.textColorOnPurple};
           font-weight: ${props => props.theme.fontWeightOnPurple};
-          font-size: 2.8rem; 
+          color: ${props => props.theme.textColorOnPurple};
         }
       }
     }
     .life {
-      @media ${device.mobileXS} { /* max-width: 319px*/
+      @media ${device.mobileXS} {
         grid-column: 1 / 3;
         grid-row: 6 / 8;
       }
-      @media ${device.mobileS} { /* min-width: 320px*/
+      @media ${device.mobileS} {
         grid-column: 1 / 3;
         grid-row: 6 / 8;
       }
-      @media ${device.mobileM} { /* min-width: 460px*/
-        grid-column: 1 / 3;
+      @media ${device.mobileM} {
         grid-row: 4 / 6;
       }
-      @media ${device.mobileL} { /* min-width: 640px*/
-        grid-column: 1 / 3;
-        grid-row: 4 / 6;
-      }
-      @media ${device.tablet} { /* min-width: 768px*/
+      @media ${device.tablet} {
         grid-column: 1 / 2;
         grid-row: 3 / 4;
       }
-      @media ${device.laptopS} { /* min-width: 1024px*/
-        grid-column: 1 / 2;
-        grid-row: 3 / 4;
-      }
-      @media ${device.laptopM} { /* min-width: 1280px*/
+      @media ${device.laptopM} {
         grid-column: -2 / -1;
         grid-row: 1 / 2;
       }
-      @media ${device.laptopL} { /* min-width: 1600px*/
-
-      }
     }
     .code {
-      @media ${device.mobileXS} { /* max-width: 319px*/
+      @media ${device.mobileXS} {
         grid-column: 1 / 3;
         grid-row: 8 / 10;
       }
-      @media ${device.mobileS} { /* min-width: 320px*/
+      @media ${device.mobileS} {
         grid-column: 1 / 3;
         grid-row: 8 / 10;
       }
-      @media ${device.mobileM} { /* min-width: 460px*/
+      @media ${device.mobileM} {
         grid-column: 3 / 5;
         grid-row: 4 / 6;
       }
-      @media ${device.mobileL} { /* min-width: 640px*/
-        grid-column: 3 / 5;
-        grid-row: 4 / 6;
-      }
-      @media ${device.tablet} { /* min-width: 768px*/
+      @media ${device.tablet} {
         grid-column: 2 / 3;
         grid-row: 3 / 4;
       }
-      @media ${device.laptopS} { /* min-width: 1024px*/
-        grid-column: 2 / 3;
-        grid-row: 3 / 4;
-      }
-      @media ${device.laptopM} { /* min-width: 1280px*/
+      @media ${device.laptopM} {
         grid-column: -2 / -1;
         grid-row: 2 / 3;
       }
-      @media ${device.laptopL} { /* min-width: 1600px*/
-
-      }
     }
-    .projects-item__break {
+    .projects-item__stack-break {
       background-color: ${props => props.theme.background};
       border-bottom: 1px solid var(--primary-color);
-      @media ${device.mobileXS} { /* max-width: 319px*/
-        grid-row: 10 / 11;
-      }
-      @media ${device.mobileS} { /* min-width: 320px*/
-        grid-row: 10 / 11;
-      }
-      @media ${device.mobileM} { /* min-width: 460px*/
+      @media ${device.mobileXS} {
         grid-row: 6 / 7;
       }
-      @media ${device.mobileL} { /* min-width: 640px*/
+      @media ${device.mobileS} {
         grid-row: 6 / 7;
       }
-      @media ${device.tablet} { /* min-width: 768px*/
-        grid-row: 4 / 5;
-      }
-      @media ${device.laptopS} { /* min-width: 1024px*/
-        grid-row: 4 / 5;
-      }
-      @media ${device.laptopM} { /* min-width: 1280px*/
+      @media ${device.tablet} {
         grid-row: 3 / 4;
       }
-      @media ${device.laptopL} { /* min-width: 1600px*/
-
+      @media ${device.laptopS} {
+        grid-row: 2 / 3;
       }
     }
     .projects-item__break:last-child {
-      background-color: ${props => props.theme.background};
       display: none;
-      @media ${device.mobileXS} { /* max-width: 319px*/
-
-      }
-      @media ${device.mobileS} { /* min-width: 320px*/
-
-      }
-      @media ${device.mobileM} { /* min-width: 460px*/
-
-      }
-      @media ${device.mobileL} { /* min-width: 640px*/
-
-      }
-      @media ${device.tablet} { /* min-width: 768px*/
-        
-      }
-      @media ${device.laptopS} { /* min-width: 1024px*/
+      background-color: ${props => props.theme.background};
+      @media ${device.laptopS} {
         display: block;
-      }
-      @media ${device.laptopM} { /* min-width: 1280px*/
-
-      }
-      @media ${device.laptopL} { /* min-width: 1600px*/
-
       }
     }
   }
-  .section-name {
-    width: 100%;
+  .projects__section-name {
+    display: grid;
+    grid-gap: 1px;
+    grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(1, 14.2vw);
+    width: 100%;
     border-bottom: 1px solid var(--primary-color);
-    p {
+    .projects__section-name--bar {
       background-color: ${props => props.theme.background};
-      @media ${device.mobileXS} { /* max-width: 319px*/
+      @media ${device.mobileXS} {
         display: none;
       }
-      @media ${device.mobileS} { /* min-width: 320px*/
+      @media ${device.mobileS} {
         display: none;
       }
-      @media ${device.mobileM} { /* min-width: 460px*/
-
-      }
-      @media ${device.mobileL} { /* min-width: 640px*/
-
-      }
-      @media ${device.tablet} { /* min-width: 768px*/
-
-      }
-      @media ${device.laptopS} { /* min-width: 1024px*/
-        display: block;
+      @media ${device.laptopS} {
         grid-column: 1 / -3;
-      }
-      @media ${device.laptopM} { /* min-width: 1280px*/
-
-      }
-      @media ${device.laptopL} { /* min-width: 1600px*/
-
+        display: block;
       }
     }
-    h1 {
-      background-color: ${props => props.theme.background};
+    .projects__section-name--name {
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 4rem;
-      @media ${device.mobileXS} { /* max-width: 319px*/
-        font-size: 4rem;
+      background-color: ${props => props.theme.background};
+      @media ${device.mobileXS} {
         grid-column: 1 / -1;
-      }
-      @media ${device.mobileS} { /* min-width: 320px*/
         font-size: 4rem;
+      }
+      @media ${device.mobileS} {
         grid-column: 1 / -1;
+        font-size: 4rem;
       }
-      @media ${device.mobileM} { /* min-width: 460px*/
-
-      }
-      @media ${device.mobileL} { /* min-width: 640px*/
-
-      }
-      @media ${device.tablet} { /* min-width: 768px*/
-
-      }
-      @media ${device.laptopS} { /* min-width: 1024px*/
-        font-size: 3.2rem;
+      @media ${device.laptopS} {
         grid-column: -3 / -1;
+        font-size: 3.2rem;
       }
-      @media ${device.laptopM} { /* min-width: 1280px*/
+      @media ${device.laptopM} {
         font-size: 3.5rem;
       }
-      @media ${device.laptopL} { /* min-width: 1600px*/
+      @media ${device.laptopL} {
         font-size: 4rem;
       }
     }
   }
+  .projects-item__stack-desc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    line-height: 1.4em;
+    letter-spacing: .05em;
+    text-align: center;
+    padding: .3em;
+    background-color: ${props => props.theme.background};
+    @media ${device.mobileXS} {
+      grid-column: 1 / -1;
+      grid-row: 1 / 1;
+    }
+    @media ${device.mobileS} {
+      grid-column: 1 / -1;
+      grid-row: 1 / 1;
+    }
+    @media ${device.tablet} { 
+      grid-column: 1 / 3;
+      grid-row: 1 / 3;
+    }
+    @media ${device.laptopS} {
+      grid-column: 4 / 5;
+      grid-row: 1 / 2;
+    }
+  }
+  .projects-item__stack-name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 2.2rem;
+    line-height: 1.4em;
+    letter-spacing: .05em;
+    text-align: center;
+    padding: .3em;
+    background-color: ${props => props.theme.background};
+    @media ${device.mobileXS} {
+      font-size: 2.1rem;
+    }
+    @media ${device.mobileS} {
+      font-size: 2.1rem;
+    }
+    @media ${device.laptopL} {
+      font-size: 2.2rem;
+    }
+  }
+  .projects-item__stack-name--replit {
+    @media ${device.mobileXS} {
+      grid-column: 3 / 5;
+      grid-row: 2 / 4;
+    }
+    @media ${device.mobileS} {
+      grid-column: 3 / 5;
+      grid-row: 2 / 4;
+    }
+    @media ${device.tablet} {
+      grid-column: 4 / 6;
+      grid-row: 1 / 2;
+    }
+    @media ${device.laptopS} {
+      grid-column: 3 / 4;
+    }
+  }
+  .projects-item__stack-name--stackblitz {
+    @media ${device.mobileXS} {
+      grid-column: 3 / 5;
+      grid-row: 4 / 6;
+    }
+    @media ${device.mobileS} {
+      grid-column: 3 / 5;
+      grid-row: 4 / 6;
+    }
+    @media ${device.tablet} {
+      grid-column: 4 / 6;
+      grid-row: 2 / 3;
+    }
+    @media ${device.laptopS} {
+      grid-column: 5 / 6;
+      grid-row: 1 / 2;
+    }
+  }
+  .projects-item__stack-photo {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: ${props => props.theme.background};
+  }
+  .projects-item__stack-photo--replit {
+    @media ${device.mobileXS} {
+      grid-column: 1 / 3;
+      grid-row: 2 / 4;
+    }
+    @media ${device.mobileS} { 
+      grid-column: 1 / 3;
+      grid-row: 2 / 4;
+    }
+    @media ${device.tablet} {
+      grid-column: 3 / 4;
+      grid-row: 1 / 2;
+    }
+    @media ${device.laptopS} {
+      grid-column: 1 / 2;
+    }
+  }
+  .projects-item__stack-photo--stackblitz {
+    @media ${device.mobileXS} {
+      grid-column: 1 / 3;
+      grid-row: 4 / 6;
+    }
+    @media ${device.mobileS} {
+      grid-column: 1 / 3;
+      grid-row: 4 / 6;
+    }
+    @media ${device.tablet} {
+      grid-column: 3 / 4;
+      grid-row: 2 / 3;
+    }
+    @media ${device.laptopS} {
+      grid-column: 7 / 8;
+      grid-row: 1 / 2;
+    }
+  }
+  .projects-item__stack-button {
+    background-color: ${props => props.theme.background};
+    transition: all .5s;
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      font-family: var(--primary-font-family);
+      font-size: 2.2rem;
+      font-weight: ${props => props.theme.fontWeightOnPurple};
+      line-height: 1.4em;
+      color: ${props => props.theme.textColor};
+      text-decoration: none;
+      padding: .5em;
+      border-style: none;
+      outline: none;
+      transition: all .5s;
+      cursor: none;
+    }
+    &:hover {
+      background-color: var(--primary-color);
+      a {
+        font-weight: ${props => props.theme.fontWeightOnPurple};
+        color: ${props => props.theme.textColorOnPurple};
+      }
+    }
+  }
+  .projects-item__stack-button--replit {
+    @media ${device.mobileXS} {
+      grid-column: 5 / 7;
+      grid-row: 2 / 4;
+    }
+    @media ${device.mobileS} {
+      grid-column: 5 / 7;
+      grid-row: 2 / 4;
+    }
+    @media ${device.tablet} {
+      grid-column: 6 / 7;
+      grid-row: 1 / 2;
+    }
+    @media ${device.laptopS} {
+      grid-column: 2 / 3;
+    }
+  }
+  .projects-item__stack-button--stackblitz {
+    @media ${device.mobileXS} {
+      grid-column: 5 / 7;
+      grid-row: 4 / 6;
+    }
+    @media ${device.mobileS} {
+      grid-column: 5 / 7;
+      grid-row: 4 / 6;
+    }
+    @media ${device.tablet} {
+      grid-column: 6 / 7;
+      grid-row: 2 / 3;
+    }
+    @media ${device.laptopS} {
+      grid-row: 1 / 2;
+    }
+  }
+  .projects-item__break {
+    background-color: ${props => props.theme.background};
+    border-bottom: 1px solid var(--primary-color);
+    @media ${device.mobileXS} {
+      grid-row: 10 / 11;
+    }
+    @media ${device.mobileS} {
+      grid-row: 10 / 11;
+    }
+    @media ${device.mobileM} {
+      grid-row: 6 / 7;
+    }
+    @media ${device.tablet} {
+      grid-row: 4 / 5;
+    }
+    @media ${device.laptopM} {
+      grid-row: 3 / 4;
+    }
+  }
+  .projects-item__break:last-child {
+    display: none;
+    background-color: ${props => props.theme.background};
+    @media ${device.laptopS} {
+      display: block;
+    }
+  }
+
 `
 
 export default React.memo(Projects);

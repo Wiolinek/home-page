@@ -13,10 +13,10 @@ const Footer = () => {
 }
 
 const FooterWrapper = styled.footer`
-  min-height: 4vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 4vh;
   text-align: center;
   background-color: ${props => props.theme.background};
   p {

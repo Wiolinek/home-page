@@ -83,7 +83,6 @@ const App = () => {
   }
 
 
-
   return (
     <>
       <ThemeProvider theme={themeState}>
@@ -92,8 +91,8 @@ const App = () => {
           <Navigation menu={menuState} theme={themeState} toggleTheme={toggleTheme} changeLanguageHandler={changeLanguageHandler} hoverSetHandler={hoverSetHandler} hoverOffHandler={hoverOffHandler} navbarColorState={navbarColorState}/>
           <Main menu={menuState[4]} about={aboutState}/>
           <About menu={menuState[0]} about={aboutState}/>
-          <Technologies language={languageState} menu={menuState[1]}/>
-          <Projects menu={menuState[2]}/>
+          <Technologies language={languageState} menu={menuState[1]} about={aboutState}/>
+          <Projects language={languageState} menu={menuState[2]}/>
           <Contact language={languageState} menu={menuState[3]}/>
           <Footer />
         </AppWrapper>
@@ -105,7 +104,7 @@ const App = () => {
 const AppWrapper = styled.div`
   overflow: hidden; 
   position: relative;
-  background-color: var(--primary-color);
+  /* background-color: var(--primary-color); */
   background-attachment: fixed;
   cursor: none;
   .cursor {
@@ -127,4 +126,4 @@ const AppWrapper = styled.div`
   }
 `
 
-export default App;
+export default React.memo(App);
