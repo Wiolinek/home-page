@@ -8,15 +8,18 @@ Project was created to demonstrate coding and programming skill.
 
 
 ## Table of Contents
+
 * [Technologies Used](#technologies-used)
 * [Screenshots](#screenshots)
 * [Setup](#setup)
 * [Project Status](#project-status)
-* [Room for Improvement](#room-for-improvement)	
+* [Room for Improvement](#room-for-improvement)
+* [License](#license)
 * [Contact](#contact)
 
 
 ## Technologies Used
+
 - Create React App
 - Styled Components
 - BEM
@@ -24,6 +27,7 @@ Project was created to demonstrate coding and programming skill.
 
 
 ## Screenshots
+
 ![Example screenshot](./img/screenshot.png)
 
 
@@ -72,12 +76,20 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 
 ## Project Status
+
 Project is: _complete_
 
 
 ## Room for Improvement
+
 - add contact form to contact section
 
+## License
+
+This website was built by Wiola Polok www.u-v.codes.
+Copyright @ 2021 Wiola Polok www.u-v.codes. All Rights Reserved.
+You are allowed to use it for both personal and commercial use, but not to claim it as your own design.
 
 ## Contact
+
 Created by [@Wiolinek](https://www.u-v.codes) - feel free to contact me!
