@@ -167,6 +167,7 @@ const TechnologiesWrapper = styled.section`
     height: 100%;
     background-color: ${props => props.theme.background};
     border: 1px solid var(--primary-color);
+    padding: .5em;
     @media ${device.mobileXS} {
       grid-column: span 2;
       grid-row: span 2;
@@ -183,53 +184,27 @@ const TechnologiesWrapper = styled.section`
       display: flex;
       justify-content: center;
       align-items: center;
-      @media ${device.mobileXS} { /* max-width: 319px*/
-
-      }
-      @media ${device.mobileS} { /* min-width: 320px*/
-        height: 78%;
-      }
-      @media ${device.mobileM} { /* min-width: 460px*/
-
-      }
-      @media ${device.mobileL} { /* min-width: 640px*/
-
-      }
-      @media ${device.tablet} { /* min-width: 768px*/
-
-      }
-      @media ${device.laptopS} { /* min-width: 1024px*/
-        height: 75%;
-      }
-      @media ${device.laptopM} { /* min-width: 1280px*/
-        height: 75%;
-      }
-      @media ${device.laptopL} { /* min-width: 1600px*/
-        height: 78%;
-      }
+      height: 78%;
       img {
-        @media ${device.mobileXS} { /* max-width: 319px*/
-          width: 58%;
+        @media ${device.mobileXS} {
+          width: 50%;
         }
-        @media ${device.mobileS} { /* min-width: 320px*/
-          width: 58%;
+        @media ${device.mobileS} {
+          width: 50%;
         }
-        @media ${device.mobileM} { /* min-width: 460px*/
-
+        @media ${device.mobileM} {
+          width: 60%;
         }
-        @media ${device.mobileL} { /* min-width: 640px*/
-
+        @media ${device.mobileL} {
+          width: 70%;
         }
-        @media ${device.tablet} { /* min-width: 768px*/
-          width: 58%;
+        @media ${device.tablet} {
+          width: 50%;
         }
-        @media ${device.laptopS} { /* min-width: 1024px*/
-          width: 58%;
+        @media ${device.laptopM} {
+          width: 55%;
         }
-        @media ${device.laptopM} { /* min-width: 1280px*/
-          width: 63%;
-        }
-        @media ${device.laptopL} { /* min-width: 1600px*/
+        @media ${device.laptopL} {
           width: 75%;
         }
       }
@@ -302,7 +277,7 @@ const TechnologiesWrapper = styled.section`
     padding: .5em;
     background-color: ${props => props.theme.backHover};
     opacity: 0;
-    transition: opacity .6s;
+    transition: opacity .7s;
   }
   .technologies__item:hover::before {
     opacity: 1;
@@ -323,7 +298,6 @@ const TechnologiesWrapper = styled.section`
     }
     @media ${device.mobileM} {
       grid-row: span 2;
-
     }
     @media ${device.laptopL} {
       grid-column: 1 / -1;

@@ -331,7 +331,7 @@ const ContactWrapper = styled.section`
         font-size: 3.3rem;
       }
       @media ${device.laptopS} {
-        font-size: 3.5rem;
+        font-size: 3.4rem;
       }
     }
     &:hover {

@@ -472,6 +472,7 @@ const ProjectsWrapper = styled.section`
     .projects-item__stack-break {
       background-color: ${props => props.theme.background};
       border-bottom: 1px solid var(--primary-color);
+      border-top: 1px solid var(--primary-color);
       @media ${device.mobileXS} {
         grid-row: 6 / 7;
       }

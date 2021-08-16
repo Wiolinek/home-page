@@ -108,7 +108,7 @@ const AppWrapper = styled.div`
   background-attachment: fixed;
   cursor: none;
   .cursor {
-    background-color: rgba(92, 0, 92, .4);
+    background-color: rgba(93, 0, 93, .4);
     width: 5.6rem;
     height: 5.6rem;
     border: 1px solid ${props => props.theme.cursorBorderColor};
