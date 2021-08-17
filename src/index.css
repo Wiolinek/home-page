@@ -58,6 +58,6 @@ body {
 
 @media (max-width: 320px) {
     * {
-        font-size: 9px;
+        font-size: 8px;
     }
 }

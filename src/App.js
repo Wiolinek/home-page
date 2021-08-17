@@ -104,7 +104,6 @@ const App = () => {
 const AppWrapper = styled.div`
   overflow: hidden; 
   position: relative;
-  /* background-color: var(--primary-color); */
   background-attachment: fixed;
   cursor: none;
   .cursor {

@@ -13,6 +13,7 @@ const Projects = ({ language, menu }) => {
 
   const [projectsState, setProjectsState] = useState();
   const [stacksState, setStacksState] = useState();
+  const [projectsDescState, setProjectsDescState] = useState();
 
   useEffect(() => {
     fetch(`https://ultra-violet.codes/projects`)
@@ -33,6 +34,17 @@ const Projects = ({ language, menu }) => {
     .catch(error => console.log(`error ${error}`))
   }, [language]);
 
+  useEffect(() => {
+    fetch(`https://ultra-violet.codes/descriptions`, {method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({language: language}),
+    })
+    .then(response => response.json())
+    .then(result => setProjectsDescState(result))
+    .catch(error => console.log(`error ${error}`))
+  }, [language]);
 
   useEffect(() => {
 
@@ -79,18 +91,6 @@ const Projects = ({ language, menu }) => {
       x: 110,
       duration: .3,
     });
-
-    gsap.set('.projects-item__stack-name--replit', {
-      y: -110,
-      duration: .5,
-      delay: 1,
-    });
-
-    gsap.set('.projects-item__stack-name--stackblitz', {
-      y: 110,
-      duration: .5,
-      delay: 1,
-    });
     
     gsap.set('.projects-item__stack-desc', {
       x: 110,
@@ -98,22 +98,12 @@ const Projects = ({ language, menu }) => {
     });
 
     gsap.set('.projects-item__stack-photo--replit', {
-      x: -110,
-      duration: .3,
-    });
-
-    gsap.set('.projects-item__stack-photo--stackblitz', {
       y: -110,
       duration: .3,
     });
 
-    gsap.set('.projects-item__stack-button--replit', {
+    gsap.set('.projects-item__stack-photo--stackblitz', {
       y: 110,
-      duration: .3,
-    });
-
-    gsap.set('.projects-item__stack-button--stackblitz', {
-      x: -110,
       duration: .3,
     });
     
@@ -171,10 +161,10 @@ const Projects = ({ language, menu }) => {
         <h1 className="projects__section-name--name">{menu !== undefined ? menu.name : 'Projects'}</h1>
       </div>
       <div className="projects__container">
-          {projectsState !== undefined && projectsState.map(project => 
+          {projectsState !== undefined & projectsDescState !== undefined && projectsState.map((project, index) => 
           <div key={project.name + project.language} className="projects-item">
             <p className="projects-item__project-name">{project.name}</p>
-            <p className="projects-item__project-desc">krotki opis strony w każdym języku</p>
+            <p className="projects-item__project-desc">{projectsDescState[index][language]}</p>
             <div className="projects-item__photo" style={{backgroundImage: `url(${project.image})`}}></div>
             <div className="projects-item__button life">
               <a href={project.life} target="_blank" rel="noreferrer">LIVE</a>
@@ -198,16 +188,21 @@ const Projects = ({ language, menu }) => {
           {stacksState !== undefined &&
             <div className="projects-item projects-item__stack-item">
               <p className="projects-item__stack-desc">{stacksState[0].description}</p>
-              <p className="projects-item__stack-name projects-item__stack-name--replit">{stacksState[0].name}</p>
-              <p className="projects-item__stack-name projects-item__stack-name--stackblitz">{stacksState[1].name}</p>
-              <div className="projects-item__stack-photo projects-item__stack-photo--replit" style={{backgroundImage: `url(${stacksState[0].image})`}}></div>
-              <div className="projects-item__stack-photo projects-item__stack-photo--stackblitz" style={{backgroundImage: `url(${stacksState[1].image})`}}></div>
-              <div className="projects-item__stack-button projects-item__stack-button--replit">
-                <a href={stacksState[0].link} target="_blank" rel="noreferrer">CODE</a>
+              <div className="projects-item__stack-photo projects-item__stack-photo--replit">
+                <a href={stacksState[0].link} target="_blank" rel="noreferrer">
+                  <img src={stacksState[0].image} alt={stacksState[0].name}></img>
+                </a>
               </div>
-              <div className="projects-item__stack-button projects-item__stack-button--stackblitz">
-                <a href={stacksState[1].link} target="_blank" rel="noreferrer">CODE</a>
+              <div className="projects-item__stack-photo projects-item__stack-photo--stackblitz">
+                <a href={stacksState[1].link} target="_blank" rel="noreferrer">
+                  <img src={stacksState[1].image} alt={stacksState[1].name}></img>
+                </a>
               </div>
+              <div className="projects-item__stack-break"></div>
+              <div className="projects-item__stack-break"></div>
+              <div className="projects-item__stack-break"></div>
+              <div className="projects-item__stack-break"></div>
+              <div className="projects-item__stack-break"></div>
               <div className="projects-item__stack-break"></div>
               <div className="projects-item__stack-break"></div>
               <div className="projects-item__stack-break"></div>
@@ -233,6 +228,7 @@ const ProjectsWrapper = styled.section`
   .projects-item {
     display: grid;
     grid-gap: 1px;
+    grid-auto-flow: dense;
     width: 100%;
     @media ${device.mobileXS} {
       grid-template-columns: repeat(6, 1fr);
@@ -471,19 +467,15 @@ const ProjectsWrapper = styled.section`
     }
     .projects-item__stack-break {
       background-color: ${props => props.theme.background};
-      border-bottom: 1px solid var(--primary-color);
-      border-top: 1px solid var(--primary-color);
-      @media ${device.mobileXS} {
-        grid-row: 6 / 7;
+      @media ${device.laptopL} {
+        border-bottom: 1px solid var(--primary-color);
       }
-      @media ${device.mobileS} {
-        grid-row: 6 / 7;
-      }
-      @media ${device.tablet} {
-        grid-row: 3 / 4;
-      }
+    }
+    .projects-item__stack-break:nth-last-child(-n+2) {
+      display: block;
+      background-color: ${props => props.theme.background};
       @media ${device.laptopS} {
-        grid-row: 2 / 3;
+        display: none;
       }
     }
     .projects-item__break:last-child {
@@ -499,6 +491,7 @@ const ProjectsWrapper = styled.section`
     grid-gap: 1px;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(1, 14.2vw);
+    grid-auto-flow: dense;
     width: 100%;
     border-bottom: 1px solid var(--primary-color);
     .projects__section-name--bar {
@@ -552,181 +545,104 @@ const ProjectsWrapper = styled.section`
     padding: .3em;
     background-color: ${props => props.theme.background};
     @media ${device.mobileXS} {
-      grid-column: 1 / -1;
-      grid-row: 1 / 1;
-    }
-    @media ${device.mobileS} {
-      grid-column: 1 / -1;
-      grid-row: 1 / 1;
-    }
-    @media ${device.tablet} { 
       grid-column: 1 / 3;
       grid-row: 1 / 3;
     }
-    @media ${device.laptopS} {
-      grid-column: 4 / 5;
-      grid-row: 1 / 2;
-    }
-  }
-  .projects-item__stack-name {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    font-size: 2.2rem;
-    line-height: 1.4em;
-    letter-spacing: .05em;
-    text-align: center;
-    padding: .3em;
-    background-color: ${props => props.theme.background};
-    @media ${device.mobileXS} {
-      font-size: 2.1rem;
-    }
     @media ${device.mobileS} {
-      font-size: 2.1rem;
+      grid-column: 1 / 3;
+      grid-row: 1 / 3;
+    }
+    @media ${device.tablet} { 
+      grid-column: 2 / 4;
+      grid-row: 1 / 3;
+    }
+    @media ${device.laptopS} {
+      grid-column: 2 / 4;
+      grid-row: 1 / 2;
     }
     @media ${device.laptopL} {
-      font-size: 2.2rem;
-    }
-  }
-  .projects-item__stack-name--replit {
-    @media ${device.mobileXS} {
-      grid-column: 3 / 5;
-      grid-row: 2 / 4;
-    }
-    @media ${device.mobileS} {
-      grid-column: 3 / 5;
-      grid-row: 2 / 4;
-    }
-    @media ${device.tablet} {
-      grid-column: 4 / 6;
-      grid-row: 1 / 2;
-    }
-    @media ${device.laptopS} {
-      grid-column: 3 / 4;
-    }
-  }
-  .projects-item__stack-name--stackblitz {
-    @media ${device.mobileXS} {
-      grid-column: 3 / 5;
-      grid-row: 4 / 6;
-    }
-    @media ${device.mobileS} {
-      grid-column: 3 / 5;
-      grid-row: 4 / 6;
-    }
-    @media ${device.tablet} {
-      grid-column: 4 / 6;
-      grid-row: 2 / 3;
-    }
-    @media ${device.laptopS} {
-      grid-column: 5 / 6;
-      grid-row: 1 / 2;
+      border-bottom: 1px solid var(--primary-color);
     }
   }
   .projects-item__stack-photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     background-color: ${props => props.theme.background};
+    transition: all .5s;
+    @media ${device.mobileXS} {
+      img {
+        width: 50px;
+      }
+    }
+    @media ${device.mobileS} {
+      img {
+        width: 60px;
+      }
+    }
+    @media ${device.tablet} {
+      img {
+        width: 70px;
+      }
+    }
+    @media ${device.laptopS} {
+      img {
+        width: 80px;
+      }
+    }
+    @media ${device.laptopM} {
+      img {
+        width: 90px;
+      }
+    }
+    @media ${device.laptopL} {
+      img {
+        width: 100px;
+      }
+    }
+    &:hover {
+      background-color: var(--primary-color);
+    }
   }
   .projects-item__stack-photo--replit {
     @media ${device.mobileXS} {
-      grid-column: 1 / 3;
-      grid-row: 2 / 4;
+      grid-column: 3 / 5;
+      grid-row: 1 / 3;
     }
     @media ${device.mobileS} { 
-      grid-column: 1 / 3;
-      grid-row: 2 / 4;
+      grid-column: 3 / 5;
+      grid-row: 1 / 3;
     }
     @media ${device.tablet} {
-      grid-column: 3 / 4;
+      grid-column: 5 / 6;
       grid-row: 1 / 2;
     }
-    @media ${device.laptopS} {
-      grid-column: 1 / 2;
+    @media ${device.laptopL} {
+      border-bottom: 1px solid var(--primary-color);
     }
   }
   .projects-item__stack-photo--stackblitz {
     @media ${device.mobileXS} {
-      grid-column: 1 / 3;
-      grid-row: 4 / 6;
+      grid-column: 5 / 7;
+      grid-row: 1 / 3;
     }
     @media ${device.mobileS} {
-      grid-column: 1 / 3;
-      grid-row: 4 / 6;
+      grid-column: 5 / 7;
+      grid-row: 1 / 3;
     }
     @media ${device.tablet} {
-      grid-column: 3 / 4;
+      grid-column: 5 / 6;
       grid-row: 2 / 3;
     }
     @media ${device.laptopS} {
-      grid-column: 7 / 8;
-      grid-row: 1 / 2;
-    }
-  }
-  .projects-item__stack-button {
-    background-color: ${props => props.theme.background};
-    transition: all .5s;
-    a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      width: 100%;
-      font-family: var(--primary-font-family);
-      font-size: 2.2rem;
-      font-weight: ${props => props.theme.fontWeightOnPurple};
-      line-height: 1.4em;
-      color: ${props => props.theme.textColor};
-      text-decoration: none;
-      padding: .5em;
-      border-style: none;
-      outline: none;
-      transition: all .5s;
-      cursor: none;
-    }
-    &:hover {
-      background-color: var(--primary-color);
-      a {
-        font-weight: ${props => props.theme.fontWeightOnPurple};
-        color: ${props => props.theme.textColorOnPurple};
-      }
-    }
-  }
-  .projects-item__stack-button--replit {
-    @media ${device.mobileXS} {
-      grid-column: 5 / 7;
-      grid-row: 2 / 4;
-    }
-    @media ${device.mobileS} {
-      grid-column: 5 / 7;
-      grid-row: 2 / 4;
-    }
-    @media ${device.tablet} {
       grid-column: 6 / 7;
       grid-row: 1 / 2;
     }
-    @media ${device.laptopS} {
-      grid-column: 2 / 3;
-    }
-  }
-  .projects-item__stack-button--stackblitz {
-    @media ${device.mobileXS} {
-      grid-column: 5 / 7;
-      grid-row: 4 / 6;
-    }
-    @media ${device.mobileS} {
-      grid-column: 5 / 7;
-      grid-row: 4 / 6;
-    }
-    @media ${device.tablet} {
-      grid-column: 6 / 7;
-      grid-row: 2 / 3;
-    }
-    @media ${device.laptopS} {
-      grid-row: 1 / 2;
+    @media ${device.laptopL} {
+      border-bottom: 1px solid var(--primary-color);
     }
   }
   .projects-item__break {
