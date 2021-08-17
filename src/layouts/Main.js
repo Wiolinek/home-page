@@ -45,7 +45,6 @@ const Main = ({ about }) => {
         end:'top 50%',
         scrub: true,
         toggleActions:'play restart complete reverse',
-        markers: true,
       },
       opacity: 1,
     });
