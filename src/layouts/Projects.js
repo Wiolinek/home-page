@@ -51,11 +51,10 @@ const Projects = ({ language, menu }) => {
     gsap.set('.projects-item__project-name', {
       y: -110,
       duration: .5,
-      delay: 1,
     });
     
     gsap.set('.projects-item__project-desc', {
-      x: 110,
+      y: 110,
       duration: .3,
     });
 
@@ -65,21 +64,18 @@ const Projects = ({ language, menu }) => {
     });
 
     gsap.set('.projects-item__details', {
-      x: 110,
-      y: -110,
-      duration: .3,
+      y: 110,
+      duration: .5,
     });
 
     gsap.set('.life', {
-      y: -110,
+      x: -110,
       duration: .3,
-      delay: -1,
     });
 
     gsap.set('.code', {
-      x: -110,
+      x: 110,
       duration: .3,
-      delay: -1,
     });
 
     gsap.set('.projects__section-name--bar', {
@@ -127,8 +123,8 @@ const Projects = ({ language, menu }) => {
         batch.forEach(element => gsap.to(element.children, {opacity: 1, y: 0, x: 0, ease: 'none',
           scrollTrigger: {
             trigger: element,
-            start: 'top 90%',
-            end:'top 50%',
+            start: 'top 85%',
+            end:'top 40%',
             scrub: true,
             toggleActions:'play restart complete reverse',
           }
@@ -142,7 +138,7 @@ const Projects = ({ language, menu }) => {
         batch.forEach(element => gsap.to(element.children, {opacity: 1, y: 0, x: 0, ease: 'none',
           scrollTrigger: {
             trigger: element,
-            start: 'top 90%',
+            start: 'top 85%',
             end:'top 50%',
             scrub: true,
             toggleActions:'play restart complete reverse',
