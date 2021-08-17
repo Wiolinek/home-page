@@ -19,8 +19,13 @@ const Main = ({ about }) => {
   }
 
   useEffect(() => {
+
+    gsap.set('.main__welcome', {
+      y: +200,
+      opacity: 0,
+    });
   
-    gsap.to('.main', {
+    gsap.to('.main__grid-container', {
       duration: 2.5,
       x: 500,
       scrollTrigger: {
@@ -32,18 +37,36 @@ const Main = ({ about }) => {
       scale: 5,
       opacity: 0,
     });
+
+    gsap.to('.main__welcome', {y: 0, ease: 'none',
+      scrollTrigger: {
+        trigger: '.main__welcome',
+        start: 'top 95%',
+        end:'top 50%',
+        scrub: true,
+        toggleActions:'play restart complete reverse',
+        markers: true,
+      },
+      opacity: 1,
+    });
   }, [])
 
   return (
     <MainWrapper id="home" className="main">
-        {grid}
+      <div className="main__grid-container">
+      {grid}
         <p className="main__tagline">{tagline}</p>
         {about !== undefined ? <p className="main__intro-about">{about[0].intro}</p> : null}
+      </div>
+      <div className="main__welcome">
+        <p>Welcome to my UV World :)</p>
+      </div>
     </MainWrapper> 
   );
 }
 
 const MainWrapper = styled.section`
+.main__grid-container {
   display: grid;
   grid-row-gap: wrap;
   grid-gap: 1px;
@@ -154,6 +177,33 @@ const MainWrapper = styled.section`
     }
     @media ${device.mobileL} {
       font-size: 1.6rem;
+    }
+  }
+}
+  .main__welcome {
+    position: absolute;
+    bottom: 10vh;
+    width: 100%;
+    text-align: center;
+    z-index: -1;
+    p {
+      font-family: 'Coda', cursive;
+      color: ${props => props.theme.textColorOnPurple};
+      @media ${device.mobileXS} {
+        font-size: 4rem;
+      }
+      @media ${device.mobileS} {
+        font-size: 4rem;
+      }
+      @media ${device.laptopS} {
+        font-size: 3.2rem;
+      }
+      @media ${device.laptopM} {
+        font-size: 3.5rem;
+      }
+      @media ${device.laptopL} {
+        font-size: 4rem;
+      }
     }
   }
 `
